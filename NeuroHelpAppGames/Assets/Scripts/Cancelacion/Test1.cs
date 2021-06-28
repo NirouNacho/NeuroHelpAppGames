@@ -1,16 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Test1 : MonoBehaviour
 {
     public Camera camera;
     public Sprite sprite;
+
     public GameObject[] imageObject;
     private GameObject randomSelected;
+    string randomSelectedName;
+    Sprite randomSelectedSprite;
+
     public int[,] Grid;
     int vertical, horizontal, rows, columns;
-    string randomSelectedName;
+    
+    public Text topText;
+    public Image topImage;
 
     //private  
 
@@ -25,10 +32,16 @@ public class Test1 : MonoBehaviour
         imageObject = Resources.LoadAll<GameObject>("Prefabs/Cancelacion/ImagesPrefabs");
         //imageObject[1].SetActive(false);
         Debug.Log(Screen.width + " w " + Screen.height + " h " + horizontal + " hori " + vertical + " verti ");
+        
         randomSelected = Instantiate(imageObject[Random.Range(0, 5)]);
         randomSelected.SetActive(false);
-        randomSelectedName = randomSelected.name;
+        
         Debug.Log(randomSelectedName);
+
+        SetRandomSelectedImgage(randomSelected);
+
+
+
         columns = horizontal ;
         rows = 4 ;
 
@@ -65,8 +78,39 @@ public class Test1 : MonoBehaviour
 
     }
 
-    private void GetRandomObjectSelected()
+    private void SetRandomSelectedImgage(object randomObj)
     {
+        
+        randomSelectedName = randomSelected.name;
+        randomSelectedSprite = randomSelected.GetComponent<SpriteRenderer>().sprite;
+        switch (randomSelectedName)
+        {
+            case "Banana(Clone)":
+
+                topText.text = "  Toca todos los plátanos que encuentres como este:";
+                
+                break;
+            case "Butterfly(Clone)":
+
+                topText.text = "  Toca todas las mariposas que encuentres como esta:";
+                break;
+
+            case "Key(Clone)":
+
+                topText.text = "  Toca todas las llaves que encuentres como esta:";
+                break;
+
+            case "Pear(Clone)":
+                topText.text = "  Toca todas las peras que encuentres como esta:";
+                break;
+            case "Shoe(Clone)":
+                topText.text = "  Toca todos los zapatos que encuentres como este:";
+                break;
+            default:
+                
+                break;
+        }
+        topImage.sprite = randomSelectedSprite;
 
     }
 }
