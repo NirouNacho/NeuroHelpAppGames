@@ -10,12 +10,14 @@ public class Test1 : MonoBehaviour
     private GameObject randomSelected;
     public int[,] Grid;
     int vertical, horizontal, rows, columns;
+    string randomSelectedName;
+
     //private  
 
     // Start is called before the first frame update
     void Start()
     {
-        randomSelected = Instantiate(imageObject[Random.Range(0, 5)]);
+       
 
         vertical = (int)camera.orthographicSize;
         horizontal = vertical * (Screen.width / Screen.height);
@@ -23,7 +25,10 @@ public class Test1 : MonoBehaviour
         imageObject = Resources.LoadAll<GameObject>("Prefabs/Cancelacion/ImagesPrefabs");
         //imageObject[1].SetActive(false);
         Debug.Log(Screen.width + " w " + Screen.height + " h " + horizontal + " hori " + vertical + " verti ");
-
+        randomSelected = Instantiate(imageObject[Random.Range(0, 5)]);
+        randomSelected.SetActive(false);
+        randomSelectedName = randomSelected.name;
+        Debug.Log(randomSelectedName);
         columns = horizontal ;
         rows = 4 ;
 
