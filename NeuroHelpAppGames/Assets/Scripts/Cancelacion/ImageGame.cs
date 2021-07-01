@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class ImageGame : MonoBehaviour
 {
     public Camera camera;
     public Sprite sprite;
 
-    private static GameManager sharedInstance;
+    private static ImageGame sharedInstance;
 
     public GameObject[] imageObject;
     private GameObject randomSelected;
-    string randomSelectedName;
+    public string randomSelectedName;
     Sprite randomSelectedSprite;
-    int randomObjbuscados;
+    public int randomObjbuscados;
     public int[,] Grid;
     int vertical, horizontal, rows, columns;
 
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         sharedInstance = this;
     }
 
-    public static GameManager GetInstance()
+    public static ImageGame GetInstance()
     {
         return sharedInstance;
     }
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-        
+        randomObjbuscados = 0;
         vertical = (int)camera.orthographicSize;
         horizontal = vertical * (Screen.width / Screen.height);
        
@@ -73,7 +73,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (randomObjbuscados == 0)
+        {
+            Debug.Log("Felicitaciones todos los objetos han sido encontrados");
+        }
     }
 
     private void Spawnfile(int x, int y,int value)
@@ -126,6 +129,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private void DestroyGrid()
+    {
+        
+    }
 
-   
 }

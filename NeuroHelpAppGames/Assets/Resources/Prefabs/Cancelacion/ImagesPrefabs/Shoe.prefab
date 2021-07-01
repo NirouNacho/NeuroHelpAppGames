@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5121946428957441863}
   - component: {fileID: 5121946428957441860}
   - component: {fileID: 6787960191515825561}
+  - component: {fileID: 1663966774034873965}
   m_Layer: 0
   m_Name: Shoe
   m_TagString: Untagged
@@ -108,3 +109,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 40, y: 22.65625}
   m_EdgeRadius: 0
+--- !u!114 &1663966774034873965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5121946428957441861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 409422e47c1d517439309e90e88d5633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

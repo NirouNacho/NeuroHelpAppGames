@@ -24,11 +24,20 @@ public class ObjectTrigger : MonoBehaviour
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
 
             Collider2D touchedCollider = Physics2D.OverlapPoint(touchPosition);
-
-            if (collider == touchedCollider)
-            {
-                gameObject.SetActive(false);
-                Debug.Log("haz tocado la pantalla en el obj: "+objName);
+            if (touch.phase == TouchPhase.Ended) 
+            { 
+                //para que el se de al finalizar el toque con la pantalla
+                if (collider == touchedCollider)
+                {
+                
+                    Debug.Log("haz tocado la pantalla en el obj: "+objName);
+                    if(ImageGame.GetInstance().randomSelectedName== objName)
+                    {
+                        ImageGame.GetInstance().randomObjbuscados--;
+                        gameObject.SetActive(false);
+                    }
+                
+                }
             }
 
         }
