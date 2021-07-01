@@ -16,10 +16,10 @@ public class ImageGame : MonoBehaviour
     Sprite randomSelectedSprite;
     public int randomObjbuscados;
     public int[,] Grid;
-    int vertical, horizontal, rows, columns;
+    int rows, columns;
 
    
-
+    
     public Text topText;
     public Image topImage;
 
@@ -40,9 +40,7 @@ public class ImageGame : MonoBehaviour
     {
 
         randomObjbuscados = 0;
-        vertical = (int)camera.orthographicSize;
-        horizontal = vertical * (Screen.width / Screen.height);
-       
+        
         imageObject = Resources.LoadAll<GameObject>("Prefabs/Cancelacion/ImagesPrefabs");
         
         randomSelected = Instantiate(imageObject[Random.Range(0, 5)]);
@@ -51,7 +49,7 @@ public class ImageGame : MonoBehaviour
 
 
 
-        columns = horizontal ;
+        columns = 5 ;
         rows = 4 ;
 
         Grid = new int[columns,rows];
@@ -84,7 +82,7 @@ public class ImageGame : MonoBehaviour
         
         GameObject g = Instantiate(imageObject[value]);
         
-        g.transform.position= new Vector3((x*2.5f)-(horizontal-0.5f), (y*2) - (vertical-1));
+        g.transform.position= new Vector3((x*2.5f)-(rows-0.5f), (y*2) - (columns-1));
 
         if (g.name == randomSelected.name)
         {
