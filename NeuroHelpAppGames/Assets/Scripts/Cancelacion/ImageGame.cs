@@ -23,6 +23,7 @@ public class ImageGame : MonoBehaviour
     public Text topText;
     public Image topImage;
 
+    public GameObject felicitacionesImage;
     //private  
 
     private void Awake()
@@ -40,7 +41,7 @@ public class ImageGame : MonoBehaviour
     {
 
         randomObjbuscados = 0;
-        
+        felicitacionesImage.SetActive(false);
         imageObject = Resources.LoadAll<GameObject>("Prefabs/Cancelacion/ImagesPrefabs");
         
         randomSelected = Instantiate(imageObject[Random.Range(0, 5)]);
@@ -73,6 +74,10 @@ public class ImageGame : MonoBehaviour
     {
         if (randomObjbuscados == 0)
         {
+            felicitacionesImage.SetActive(true);
+            DestroyObjects("cancelationObject");
+            randomObjbuscados = 1;
+            
             Debug.Log("Felicitaciones todos los objetos han sido encontrados");
         }
     }
@@ -127,9 +132,9 @@ public class ImageGame : MonoBehaviour
 
     }
 
-    private void DestroyGrid()
+    private void DestroyObjects(string tag)
     {
-        
+        Destroy(GameObject.FindWithTag(tag));
     }
 
 }
