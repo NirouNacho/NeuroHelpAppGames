@@ -34,6 +34,7 @@ public class ObjectTrigger : MonoBehaviour
                     if(ImageGame.GetInstance().randomSelectedName== objName)
                     {
                         ImageGame.GetInstance().randomObjbuscados--;
+                        gameObject.transform.SetParent(ImageGame.GetInstance().auxDestroy.transform);
                         gameObject.SetActive(false);
                     }
                 

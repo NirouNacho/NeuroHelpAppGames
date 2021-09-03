@@ -18,8 +18,8 @@ public class ImageGame : MonoBehaviour
     public int[,] Grid;
     int rows, columns;
 
-   
-    
+    public GameObject auxDestroy;
+
     public Text topText;
     public Image topImage;
 
@@ -45,6 +45,7 @@ public class ImageGame : MonoBehaviour
         imageObject = Resources.LoadAll<GameObject>("Prefabs/Cancelacion/ImagesPrefabs");
         
         randomSelected = Instantiate(imageObject[Random.Range(0, 5)]);
+        randomSelected.transform.SetParent(auxDestroy.transform);
         randomSelected.SetActive(false);
         SetRandomSelectedImgage(randomSelected);
 
@@ -134,7 +135,28 @@ public class ImageGame : MonoBehaviour
 
     private void DestroyObjects(string tag)
     {
-        Destroy(GameObject.FindWithTag(tag));
+        ActivateInactiveObjects();
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
+        foreach (GameObject target in gameObjects)
+        {
+            Debug.Log(target.name);
+        }
+
+        foreach (GameObject target in gameObjects)
+        {
+            GameObject.Destroy(target);
+        }
+
+
+        
     }
 
+    private void ActivateInactiveObjects()
+    {
+        
+        for (int i = 0; i < auxDestroy.transform.childCount; i++)
+        {
+            auxDestroy.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
 }
