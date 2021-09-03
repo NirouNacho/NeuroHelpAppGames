@@ -19,7 +19,8 @@ public class ImageGame : MonoBehaviour
     int rows, columns;
 
     public GameObject auxDestroy;
-
+    
+    public Button SearchObjPhrase;
     public Text topText;
     public Image topImage;
 
@@ -77,7 +78,8 @@ public class ImageGame : MonoBehaviour
         {
             felicitacionesImage.SetActive(true);
             DestroyObjects("cancelationObject");
-            randomObjbuscados = 1;
+            SearchObjPhrase.gameObject.SetActive(false);
+            randomObjbuscados = -1;
             
             Debug.Log("Felicitaciones todos los objetos han sido encontrados");
         }
