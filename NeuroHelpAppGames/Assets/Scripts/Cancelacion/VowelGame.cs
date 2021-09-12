@@ -91,7 +91,7 @@ public class VowelGame : MonoBehaviour
             Debug.Log("Felicitaciones todos los objetos han sido encontrados");
             //GameManager.GetInstance().StartVowelGame();
             StartCoroutine(GameManager.GetInstance().FelicidadesWait(GameState.InicioNumberGame));
-            GameManager.GetInstance().GetComponent<ImageGame>().enabled = false;
+            GameManager.GetInstance().GetComponent<VowelGame>().enabled = false;
         }
     }
 

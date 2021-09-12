@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public enum GameState
 {
-    InicioImgGame, ImgGame, InicioVowelGame, VowelGame, InicioNumberGame, NumberGame//, FinalScore
+    InicioImgGame, ImgGame, InicioVowelGame, VowelGame, InicioNumberGame, NumberGame, Final//, FinalScore
 }
 
 public class GameManager : MonoBehaviour
@@ -52,8 +52,10 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.InicioImgGame;
         I1erJuego.enabled = true;
         V2doJuego.enabled = false;
+        N3erJuego.enabled = false;
         this.GetComponent<ImageGame>().enabled=false;
         this.GetComponent<VowelGame>().enabled = false;
+        this.GetComponent<NumberGame>().enabled = false;
         Debug.Log(currentGameState);
     }
 
@@ -136,13 +138,20 @@ public class GameManager : MonoBehaviour
             case GameState.InicioNumberGame:
                 I1erJuego.enabled = false;
                 V2doJuego.enabled = false;
-                N3erJuego.enabled = false;
+                N3erJuego.enabled = true;
                 Debug.Log(currentGameState);
                 break;
             case GameState.NumberGame:
                 I1erJuego.enabled = false;
                 V2doJuego.enabled = false;
-                N3erJuego.enabled = true;
+                N3erJuego.enabled = false;
+                Debug.Log(currentGameState);
+                break;
+
+            case GameState.Final:
+                I1erJuego.enabled = false;
+                V2doJuego.enabled = false;
+                N3erJuego.enabled = false;
                 Debug.Log(currentGameState);
                 break;
             default:

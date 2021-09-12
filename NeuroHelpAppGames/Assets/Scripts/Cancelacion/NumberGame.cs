@@ -69,7 +69,7 @@ public class NumberGame : MonoBehaviour
             }
         }
         Debug.Log("este es el random de voweels" + randomObjbuscados);
-        GameManager.GetInstance().StartVowelGame();
+        GameManager.GetInstance().StartNumberGame();
     }
 
     // Start is called before the first frame update
@@ -91,8 +91,8 @@ public class NumberGame : MonoBehaviour
 
             Debug.Log("Felicitaciones todos los objetos han sido encontrados");
             //GameManager.GetInstance().StartVowelGame();
-            StartCoroutine(GameManager.GetInstance().FelicidadesWait(GameState.InicioNumberGame));
-            GameManager.GetInstance().GetComponent<ImageGame>().enabled = false;
+            StartCoroutine(GameManager.GetInstance().FelicidadesWait(GameState.Final));
+            GameManager.GetInstance().GetComponent<NumberGame>().enabled = false;
         }
     }
 
@@ -116,28 +116,61 @@ public class NumberGame : MonoBehaviour
         randomSelectedSprite = randomSelected.GetComponent<SpriteRenderer>().sprite;
         switch (randomSelectedName)
         {
-            case "VocalA(Clone)":
+            case "Numero1(Clone)":
 
-                topText.text = "  Toca todos las vocales 'a' que encuentres como esta:";
+                topText.text = "  Toca todos las números 1 que encuentres: ";
 
                 break;
-            case "VocalE(Clone)":
+            case "Numero2(Clone)":
 
-                topText.text = "  Toca todas las vocales 'e' que encuentres como esta:";
+                topText.text = "  Toca todos las números 2 que encuentres: ";
+
                 break;
 
-            case "VocalI(Clone)":
+            case "Numero3(Clone)":
 
-                topText.text = "  Toca todas las vocales 'i' que encuentres como esta:";
+                topText.text = "  Toca todos las números 3 que encuentres: ";
+
+                break;
+            case "Numero4(Clone)":
+
+                topText.text = "  Toca todos las números 4 que encuentres: ";
+
                 break;
 
-            case "VocalO(Clone)":
-                topText.text = "  Toca todas las vocales 'o' que encuentres como esta:";
+            case "Numero5(Clone)":
+
+                topText.text = "  Toca todos las números 5 que encuentres: ";
+
+                break;
+            case "Numero6(Clone)":
+
+                topText.text = "  Toca todos las números 6 que encuentres: ";
+
                 break;
 
-            case "VocalU(Clone)":
-                topText.text = "  Toca todos las vocales 'u' que encuentres como esta:";
+            case "Numero7(Clone)":
+
+                topText.text = "  Toca todos las números 7 que encuentres: ";
+
                 break;
+            case "Numero8(Clone)":
+
+                topText.text = "  Toca todos las números 8 que encuentres: ";
+
+                break;
+
+            case "Numero9(Clone)":
+
+                topText.text = "  Toca todos las números 9 que encuentres: ";
+
+                break;
+            case "Numero0(Clone)":
+
+                topText.text = "  Toca todos las números 0 que encuentres: ";
+
+                break;
+
             default:
 
                 break;
