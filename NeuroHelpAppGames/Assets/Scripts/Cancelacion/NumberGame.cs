@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ImageGame : MonoBehaviour
+public class NumberGame : MonoBehaviour
 {
+
     public Camera camera;
     public Sprite sprite;
 
-    private static ImageGame sharedInstance;
+    private static NumberGame sharedInstance;
 
-    public GameObject[] imageObject;
+    public GameObject[] numberObject;
     private GameObject randomSelected;
     public string randomSelectedName;
     Sprite randomSelectedSprite;
@@ -19,36 +20,33 @@ public class ImageGame : MonoBehaviour
     int rows, columns;
 
     public GameObject auxDestroy;
-    
+
     public GameObject SearchObjPhrase;
     public Text topText;
     public Image topImage;
 
     public GameObject felicitacionesImage;
 
-    //private  
-
-    
-
     private void Awake()
     {
         sharedInstance = this;
     }
 
-    public static ImageGame GetInstance()
+    public static NumberGame GetInstance()
     {
         return sharedInstance;
     }
 
-
-    public void StartImageGame()
+    public void StartNumberGame()
     {
+
         randomObjbuscados = 0;
         felicitacionesImage.SetActive(false);
         SearchObjPhrase.SetActive(true);
-        imageObject = Resources.LoadAll<GameObject>("Prefabs/Cancelacion/ImagesPrefabs");
+        Debug.Log("si llega");
+        numberObject = Resources.LoadAll<GameObject>("Prefabs/Cancelacion/NumberPrefabs");
 
-        randomSelected = Instantiate(imageObject[Random.Range(0, 5)]);
+        randomSelected = Instantiate(numberObject[Random.Range(0, 5)]);
         randomSelected.transform.SetParent(auxDestroy.transform);
         randomSelected.SetActive(false);
         SetRandomSelectedImage(randomSelected);
@@ -70,41 +68,38 @@ public class ImageGame : MonoBehaviour
                 }
             }
         }
-        Debug.Log(randomObjbuscados);
-        GameManager.GetInstance().StartImageGame();
+        Debug.Log("este es el random de voweels" + randomObjbuscados);
+        GameManager.GetInstance().StartVowelGame();
     }
-
 
     // Start is called before the first frame update
     void Start()
     {
 
-       
     }
-    
+
     // Update is called once per frame
     void Update()
     {
+
         if (randomObjbuscados == 0)
         {
-            felicitacionesImage.SetActive(true);
+            //felicitacionesImage.SetActive(true);
             DestroyObjects("cancelationObject");
             SearchObjPhrase.gameObject.SetActive(false);
             randomObjbuscados = -1;
-            
+
             Debug.Log("Felicitaciones todos los objetos han sido encontrados");
-            
-            StartCoroutine( GameManager.GetInstance().FelicidadesWait(GameState.InicioVowelGame));
+            //GameManager.GetInstance().StartVowelGame();
+            StartCoroutine(GameManager.GetInstance().FelicidadesWait(GameState.InicioNumberGame));
             GameManager.GetInstance().GetComponent<ImageGame>().enabled = false;
         }
-
-
     }
 
     private void Spawnfile(int x, int y, int value)
     {
 
-        GameObject g = Instantiate(imageObject[value]);
+        GameObject g = Instantiate(numberObject[value]);
 
         g.transform.position = new Vector3((x * 2.5f) - (rows - 0.5f), (y * 2) - (columns - 1));
 
@@ -114,42 +109,43 @@ public class ImageGame : MonoBehaviour
         }
     }
 
-
     private void SetRandomSelectedImage(object randomObj)
     {
-        
+
         randomSelectedName = randomSelected.name;
         randomSelectedSprite = randomSelected.GetComponent<SpriteRenderer>().sprite;
         switch (randomSelectedName)
         {
-            case "Banana(Clone)":
+            case "VocalA(Clone)":
 
-                topText.text = "  Toca todos los plátanos que encuentres como este:";
-                
+                topText.text = "  Toca todos las vocales 'a' que encuentres como esta:";
+
                 break;
-            case "Butterfly(Clone)":
+            case "VocalE(Clone)":
 
-                topText.text = "  Toca todas las mariposas que encuentres como esta:";
-                break;
-
-            case "Key(Clone)":
-
-                topText.text = "  Toca todas las llaves que encuentres como esta:";
+                topText.text = "  Toca todas las vocales 'e' que encuentres como esta:";
                 break;
 
-            case "Pear(Clone)":
-                topText.text = "  Toca todas las peras que encuentres como esta:";
+            case "VocalI(Clone)":
+
+                topText.text = "  Toca todas las vocales 'i' que encuentres como esta:";
                 break;
-            case "Shoe(Clone)":
-                topText.text = "  Toca todos los zapatos que encuentres como este:";
+
+            case "VocalO(Clone)":
+                topText.text = "  Toca todas las vocales 'o' que encuentres como esta:";
+                break;
+
+            case "VocalU(Clone)":
+                topText.text = "  Toca todos las vocales 'u' que encuentres como esta:";
                 break;
             default:
-                
+
                 break;
         }
         topImage.sprite = randomSelectedSprite;
 
     }
+
 
     private void DestroyObjects(string tag)
     {
@@ -166,12 +162,12 @@ public class ImageGame : MonoBehaviour
         }
 
 
-        
+
     }
 
     private void ActivateInactiveObjects()
     {
-        
+
         for (int i = 0; i < auxDestroy.transform.childCount; i++)
         {
             auxDestroy.transform.GetChild(i).gameObject.SetActive(true);

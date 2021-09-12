@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectTrigger : MonoBehaviour
+public class VowObjectTrigger : MonoBehaviour
 {
     string objName;
     Collider2D collider;
+ 
+  
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<Collider2D>();
         // obj = GetComponent<>
         objName = gameObject.name;
-        
     }
 
     // Update is called once per frame
@@ -24,20 +25,23 @@ public class ObjectTrigger : MonoBehaviour
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
 
             Collider2D touchedCollider = Physics2D.OverlapPoint(touchPosition);
-            if (touch.phase == TouchPhase.Ended) 
-            { 
+            if (touch.phase == TouchPhase.Ended)
+            {
+
                 //para que el se de al finalizar el toque con la pantalla
+
+
                 if (collider == touchedCollider)
                 {
-                
-                    Debug.Log("haz tocado la pantalla en el obj: "+objName);
-                    if(ImageGame.GetInstance().randomSelectedName== objName)
+
+                    Debug.Log("haz tocado la pantalla en el obj: " + objName);
+                    if (VowelGame.GetInstance().randomSelectedName == objName)
                     {
-                        ImageGame.GetInstance().randomObjbuscados--;
-                        gameObject.transform.SetParent(ImageGame.GetInstance().auxDestroy.transform);
+                        VowelGame.GetInstance().randomObjbuscados--;
+                        gameObject.transform.SetParent(VowelGame.GetInstance().auxDestroy.transform);
                         gameObject.SetActive(false);
                     }
-                
+
                 }
             }
 
