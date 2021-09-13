@@ -17,7 +17,9 @@ public class GameManager : MonoBehaviour
     public Canvas I1erJuego;
     public Canvas V2doJuego;
     public Canvas N3erJuego;
-  
+    public Canvas Final;
+
+
     private void Awake()
     {
         sharedInstance = this;
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
         I1erJuego.enabled = true;
         V2doJuego.enabled = false;
         N3erJuego.enabled = false;
+        Final.enabled = false;
         this.GetComponent<ImageGame>().enabled=false;
         this.GetComponent<VowelGame>().enabled = false;
         this.GetComponent<NumberGame>().enabled = false;
@@ -78,9 +81,15 @@ public class GameManager : MonoBehaviour
     //    ChangeGameState(GameState.Menu);
     }
 
-    public void StartImageGame()
+    public void RepeatGames()
     {
         ChangeGameState(GameState.ImgGame);
+        this.GetComponent<ImageGame>().enabled = true;
+    }
+
+    public void StartImageGame()
+    {
+        ChangeGameState(GameState.InicioImgGame);
         this.GetComponent<ImageGame>().enabled = true;
 
 
@@ -109,22 +118,25 @@ public class GameManager : MonoBehaviour
         switch (newGameState)
         {
             case GameState.InicioImgGame:
-                I1erJuego.enabled = true;
+                I1erJuego.enabled = false;
                 V2doJuego.enabled = false;
                 N3erJuego.enabled = false;
+                Final.enabled = false;
                 Debug.Log(currentGameState);
                 break;
             case GameState.ImgGame:
                 ImageGame.GetInstance().SearchObjPhrase.SetActive(true);
-                I1erJuego.enabled = false;
+                I1erJuego.enabled = true;
                 V2doJuego.enabled = false;
                 N3erJuego.enabled = false;
+                Final.enabled = false;
                 Debug.Log(currentGameState);
                 break;
             case GameState.InicioVowelGame:
                 I1erJuego.enabled = false;
                 V2doJuego.enabled = true;
                 N3erJuego.enabled = false;
+                Final.enabled = false;
                 Debug.Log(currentGameState);
                 break;
             case GameState.VowelGame:
@@ -132,6 +144,7 @@ public class GameManager : MonoBehaviour
                 I1erJuego.enabled = false;
                 V2doJuego.enabled = false;
                 N3erJuego.enabled = false;
+                Final.enabled = false;
                 Debug.Log(currentGameState);
                 break;
 
@@ -139,12 +152,14 @@ public class GameManager : MonoBehaviour
                 I1erJuego.enabled = false;
                 V2doJuego.enabled = false;
                 N3erJuego.enabled = true;
+                Final.enabled = false;
                 Debug.Log(currentGameState);
                 break;
             case GameState.NumberGame:
                 I1erJuego.enabled = false;
                 V2doJuego.enabled = false;
                 N3erJuego.enabled = false;
+                Final.enabled = false;
                 Debug.Log(currentGameState);
                 break;
 
@@ -152,6 +167,7 @@ public class GameManager : MonoBehaviour
                 I1erJuego.enabled = false;
                 V2doJuego.enabled = false;
                 N3erJuego.enabled = false;
+                Final.enabled = true;
                 Debug.Log(currentGameState);
                 break;
             default:
