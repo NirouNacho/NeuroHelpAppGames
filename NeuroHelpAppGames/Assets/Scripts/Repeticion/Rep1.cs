@@ -51,7 +51,8 @@ public class Rep1 : MonoBehaviour
 
     }
 
-    //llena una fila con dos prefabas que se repiten y los otros 3 no
+    //llena una fila con dos prefabas que se repiten y los otros y guarda el rabdom escogido
+    //en [1][0]
     public GameObject[][] LlenarArrayFilas()
     {
         GameObject auxObj;
@@ -72,35 +73,55 @@ public class Rep1 : MonoBehaviour
         }
 
         //lleno los otros tres
-        
+      
+        for (int y = 0; y <= 4; y ++) //hago 5 veces
+        {
+                int a = Random.Range(0, 9);
+                auxObj = arrayObject[a];
+                bool canIn = false;
+               for(int x= 0;x<= 4; x++)//pregunto 5 veces 
+               {
+                    if (auxObj.Equals(auxVector[0][x]))
+                    {
+                        canIn = false;
+                        break;
+                    }
+                    else
+                    {
+                        canIn = true;
+                    }
+               }
            
+               if (canIn)
+                {
+                    auxVector[0][y] = auxObj;
+                }
             
-            
-           
-                
-    for (int y = 0; y <= 4; y ++)
-    {
-            int a = Random.Range(0, 9);
-            auxObj = arrayObject[a];
-            bool different = false;
-            auxVector[0][y] = arrayObject[a];
-            if (arrayObject[a].Equals(auxVector[0][y]))
-            {
-                break;
-            }
-            else
-            {
-                auxVector[0][i] = arrayObject[a];
-            }
-                    
-    }
-                
-                
-            
+        }
 
-        
-        
         return auxVector;
     }
+
+
+    private void ImprimirFila(GameObject[][] aImprimir)
+    {
+
+    }
+
+    private void Spawnfile(int x, int y, int value, GameObject[][] aImprimir)
+    {
+        int columns = 5;
+        int rows = 4;
+
+        GameObject g = Instantiate(aImprimir[0][value]);
+
+        g.transform.position = new Vector3((x * 2.5f) - (rows - 0.5f), (y * 2) - (columns - 1));
+
+        if (g.name == randomSelected.name)
+        {
+            randomObjbuscados++;
+        }
+    }
+
 
 }
