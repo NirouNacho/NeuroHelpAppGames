@@ -131,6 +131,12 @@ public class Rep1 : MonoBehaviour
                         y--;
                         break;
                     }
+                    else if (auxObj.name== auxVector[1, 0].name)
+                    {
+                        canIn = false;
+                        y--;
+                        break;
+                    }
                    
              
                 }
