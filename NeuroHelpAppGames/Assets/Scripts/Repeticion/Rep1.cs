@@ -15,7 +15,7 @@ public class Rep1 : MonoBehaviour
 
     public GameObject[] auxArray;
     public GameObject[,] auxVector;
-    public GameObject[,] PrimeraFila;
+    GameObject[,] PrimeraFila;
     GameObject[,] SegundaFila;
     GameObject[,] TerceraFila;
     GameObject[,] CuartaFila;
@@ -26,8 +26,8 @@ public class Rep1 : MonoBehaviour
         sharedInstance = this;
 
         auxVector = new GameObject[2,9]; //quiero dos arrays de 9 slots
-
-
+        PrimeraFila = new GameObject[2, 9];
+        SegundaFila = new GameObject[2, 9];
 
     }
     //singelton
@@ -40,9 +40,27 @@ public class Rep1 : MonoBehaviour
     public void StartRep1Game()
     {
         arrayObject = LlenarArrayObj("Prefabs/Repeticion");
-        PrimeraFila = LlenarArrayFilas();
+        PrimeraFila=LlenarArrayFilas(PrimeraFila);
+
+        SegundaFila=LlenarArrayFilas(SegundaFila);
+
+
+
+        //for(int i = 0; i <= 4; i ++)
+        //{
+        //    Debug.Log("Array 1: " + PrimeraFila[0, i]);
+        //}
+
+        //for (int i = 0; i <= 4; i++)
+        //{
+        //    Debug.Log("Array 2: " + SegundaFila[0, i]);
+        //}
+
+
+
         Debug.Log("primera fila");
-        ImprimirFila(PrimeraFila);
+        ImprimirFila(PrimeraFila,0);
+        ImprimirFila(SegundaFila,1);
         Debug.Log("impresos");
     }
     
@@ -74,14 +92,15 @@ public class Rep1 : MonoBehaviour
 
     //llena una fila con dos prefabas que se repiten y los otros y guarda el rabdom escogido
     //en [1][0]
-    public GameObject[,] LlenarArrayFilas()
+    public GameObject[,] LlenarArrayFilas(GameObject[,] aLLenar)
     {
+        aLLenar = new GameObject[2, 9];
         GameObject auxObj;
         auxObj = GetRandomSelected(arrayObject);
         Debug.Log("random select auxObj " + auxObj);
-        auxVector[1,0] = auxObj;
+        aLLenar[1,0] = auxObj;
         //auxObj = auxVector[1,0];
-        Debug.Log("Vector auxVector[1,0] "+ auxVector[1, 0]);
+        Debug.Log("Vector aLLenar[1,0] " + aLLenar[1, 0]);
 
         // lleno los dos que se repiten
       
@@ -91,23 +110,16 @@ public class Rep1 : MonoBehaviour
             {
                 randomb = UnityEngine.Random.Range(0, 5);
             }
-            Debug.Log("Random a: " + randoma);
-            Debug.Log("Random b: " + randomb);
 
-            auxVector[0, randoma] = auxObj;
-            auxVector[0, randomb] = auxObj;
+            aLLenar[0, randoma] = auxObj;
+            aLLenar[0, randomb] = auxObj;
+            
+            Debug.Log("Vector aLLenar[0," + randoma + " ] randoma " + aLLenar[0, randoma]);
+            Debug.Log("Vector aLLenar[0," + randomb + " ] randomb " + aLLenar[0, randomb]);
 
-        Debug.Log("Vector auxVector[0,a] " + auxVector[0, randoma]);
-        Debug.Log("Vector auxVector[0,b] " + auxVector[0, randomb]);
 
-        for (int k = 0; k <= 4; k++)
-        {
-            Debug.Log("Vector de objetos [0,"+k+"]  " + auxVector[0, k]);
-        }
-        Debug.Log("random  auxObj " + auxObj);
-       
-        
-        
+
+
         //lleno los otros tres
 
         for (int y = 0; y <= 4; y ++) //hago 5 veces
@@ -121,17 +133,24 @@ public class Rep1 : MonoBehaviour
                 {
                     
                     
-                    if (auxVector[0, x] == null)
+                    if (aLLenar[0, x] == null)
                     {
                         canIn = true;
+                        if (auxObj.name == aLLenar[1, 0].name)
+                        {
+                            canIn = false;
+                            y--;
+                            break;
+                        }
+                        
                     }
-                    else if(auxVector[0, x].name == auxObj.name)
+                    else if(aLLenar[0, x].name == auxObj.name)
                     {
                         canIn = false;
                         y--;
                         break;
                     }
-                    else if (auxObj.name== auxVector[1, 0].name)
+                    else if (auxObj.name== aLLenar[1, 0].name)
                     {
                         canIn = false;
                         y--;
@@ -142,28 +161,26 @@ public class Rep1 : MonoBehaviour
                 }
             if (canIn)
             {
-                auxVector[0, y] = auxObj;
+                aLLenar[0, y] = auxObj;
             }
    
         }
 
-
-        Debug.Log("Vector lleno");
-        for (int k = 0; k <= 4; k++)
+        for (int i = 0; i <= 4; i++)
         {
-            Debug.Log("Vector de objetos [0," + k + "]  " + auxVector[0, k]);
+            Debug.Log("Array a llenar:  aLLenar[0,"+ i + " ]" + aLLenar[0, i]);
         }
-
-        return auxVector;
+        Debug.Log("Fin a llenar");
+        return aLLenar;
     }
 
 
-    private void ImprimirFila(GameObject[,] aImprimir)
+    private void ImprimirFila(GameObject[,] aImprimir,int posInicial)
     {
 
         for (int i = 0; i <= 4 ; i++)//5 colums
         {
-            Spawnfile(i, 0, aImprimir);
+            Spawnfile(i, posInicial, aImprimir);
         }
     }
 
