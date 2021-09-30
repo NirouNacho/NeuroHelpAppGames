@@ -10,11 +10,13 @@ public class Rep1 : MonoBehaviour
     private static Rep1 sharedInstance;
 
     public GameObject[] arrayObject;
+    GameObject[] ObjfondoDeFila;
     private GameObject randomSelected;
     public GameObject auxDestroy;
 
     public GameObject[] auxArray;
     public GameObject[,] auxVector;
+    
     GameObject[,] PrimeraFila;
     GameObject[,] SegundaFila;
     GameObject[,] TerceraFila;
@@ -24,6 +26,7 @@ public class Rep1 : MonoBehaviour
     private void Awake()
     {
         sharedInstance = this;
+        ObjfondoDeFila = LlenarArrayObj("Prefabs/Repeticion/filas");
 
         auxVector = new GameObject[2,9]; //quiero dos arrays de 9 slots
         PrimeraFila = new GameObject[2, 9];
@@ -39,11 +42,11 @@ public class Rep1 : MonoBehaviour
 
     public void StartRep1Game()
     {
-        arrayObject = LlenarArrayObj("Prefabs/Repeticion");
+        arrayObject = LlenarArrayObj("Prefabs/Repeticion/Images");
         PrimeraFila=LlenarArrayFilas(PrimeraFila);
 
         SegundaFila=LlenarArrayFilas(SegundaFila);
-
+        
 
 
         //for(int i = 0; i <= 4; i ++)
@@ -177,11 +180,13 @@ public class Rep1 : MonoBehaviour
 
     private void ImprimirFila(GameObject[,] aImprimir,int posInicial)
     {
-
+        GameObject filaObject=Instantiate( ObjfondoDeFila[0]);
+        filaObject.transform.position= new Vector3(1.621f, (posInicial * 2)-4,1);
         for (int i = 0; i <= 4 ; i++)//5 colums
         {
             Spawnfile(i, posInicial, aImprimir);
         }
+
     }
 
     private void Spawnfile(int x, int y, GameObject[,] aImprimir)
