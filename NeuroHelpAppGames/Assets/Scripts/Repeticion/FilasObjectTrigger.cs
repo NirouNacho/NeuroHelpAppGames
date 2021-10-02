@@ -1,32 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//addressable extension
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
+
 
 public class FilasObjectTrigger : MonoBehaviour
 {
 
     string objName;
-    public SpriteRenderer spriteRenderer;
-    public Sprite sprite;
+    public SpriteRenderer childSpriteRenderer;
+    GameObject child;
     Collider2D collider;
 
+    private void Awake()
+    {
+
+        child = gameObject.transform.Find("Child").gameObject;
+
+        childSpriteRenderer = child.GetComponent<SpriteRenderer>();
+    }
     // Start is called before the first frame update
     void Start()
     {
 
         collider = GetComponent<Collider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        
         // obj = GetComponent<>
         objName = gameObject.name;
 
 
-        //addressables
-
-        AsyncOperationHandle<Sprite[]> spriteHandle = Addressables.LoadAssetAsync<Sprite[]>("Assets/BirdHeroSprite.png");
-        spriteHandle.Completed += LoadSpritesWhenReady;
 
     }
 
@@ -49,7 +50,7 @@ public class FilasObjectTrigger : MonoBehaviour
                 {
                     Debug.Log("haz tocado la pantalla en el obj: " + objName);
                     //que es lo que debe hacer al tocar
-                    spriteRenderer.sprite = spriteArray[0];
+                    TurnOnSquare();
 
                 }
             }
@@ -58,16 +59,14 @@ public class FilasObjectTrigger : MonoBehaviour
     }
 
 
-    void LoadSpritesWhenReady(AsyncOperationHandle<Sprite[]> handleToCheck)
+
+    void TurnOnSquare()
     {
-        if (handleToCheck.Status == AsyncOperationStatus.Succeeded)
-        {
-            spriteArray = handleToCheck.Result;
-        }
+        childSpriteRenderer.enabled = true;
     }
 
-    void ChangeSprite()
+    void TurnOffSquare()
     {
-
+        childSpriteRenderer.enabled = false;
     }
 }

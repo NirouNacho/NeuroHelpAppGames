@@ -42,10 +42,11 @@ public class Rep1 : MonoBehaviour
 
     public void StartRep1Game()
     {
-        arrayObject = LlenarArrayObj("Prefabs/Repeticion/Images");
-        PrimeraFila=LlenarArrayFilas(PrimeraFila);
+        arrayObject = LlenarArrayObj("Prefabs/Repeticion/ImagesChilds");
+        
+        PrimeraFila=LlenarArrayFilas(PrimeraFila, "primerafila");
 
-        SegundaFila=LlenarArrayFilas(SegundaFila);
+        //SegundaFila=LlenarArrayFilas(SegundaFila, "segundafila");
         
 
 
@@ -63,7 +64,7 @@ public class Rep1 : MonoBehaviour
 
         Debug.Log("primera fila");
         ImprimirFila(PrimeraFila,0);
-        ImprimirFila(SegundaFila,1);
+        //ImprimirFila(SegundaFila,1);
         Debug.Log("impresos");
     }
     
@@ -95,7 +96,7 @@ public class Rep1 : MonoBehaviour
 
     //llena una fila con dos prefabas que se repiten y los otros y guarda el rabdom escogido
     //en [1][0]
-    public GameObject[,] LlenarArrayFilas(GameObject[,] aLLenar)
+    public GameObject[,] LlenarArrayFilas(GameObject[,] aLLenar,string tag)
     {
         aLLenar = new GameObject[2, 9];
         GameObject auxObj;
@@ -113,7 +114,7 @@ public class Rep1 : MonoBehaviour
             {
                 randomb = UnityEngine.Random.Range(0, 5);
             }
-
+            auxObj.tag = tag;
             aLLenar[0, randoma] = auxObj;
             aLLenar[0, randomb] = auxObj;
             
@@ -164,7 +165,9 @@ public class Rep1 : MonoBehaviour
                 }
             if (canIn)
             {
+                auxObj.tag = tag;
                 aLLenar[0, y] = auxObj;
+                
             }
    
         }
