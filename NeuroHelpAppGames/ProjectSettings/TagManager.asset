@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - cancelationObject
+  - primerafila
+  - segundafila
+  - tercerafila
+  - cuartafila
   layers:
   - Default
   - TransparentFX

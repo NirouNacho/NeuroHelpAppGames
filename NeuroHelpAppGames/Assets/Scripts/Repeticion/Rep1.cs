@@ -11,26 +11,49 @@ public class Rep1 : MonoBehaviour
 
     public GameObject[] arrayObject;
     GameObject[] ObjfondoDeFila;
-    private GameObject randomSelected;
+    
     public GameObject auxDestroy;
 
     public GameObject[] auxArray;
     public GameObject[,] auxVector;
-    
-    GameObject[,] PrimeraFila;
-    GameObject[,] SegundaFila;
-    GameObject[,] TerceraFila;
-    GameObject[,] CuartaFila;
+
+    public GameObject objetoPrimerafila;
+    public GameObject objetoSegindafila;
+    public GameObject objetoTercerafila;
+    public GameObject objetoCuartafila;
+
+    public int contPrimFila=0;
+    public int contSegFila = 0;
+    public int contTerFila = 0;
+    public int contCuarFila = 0;
+
+
+    public GameObject[,] PrimeraFila;
+    public GameObject[,] SegundaFila;
+    public GameObject[,] TerceraFila;
+    public GameObject[,] CuartaFila;
 
     //singelton
     private void Awake()
     {
         sharedInstance = this;
+
+        contPrimFila = 0;
+        contSegFila = 0;
+        contTerFila = 0;
+        contCuarFila = 0;
+
+
         ObjfondoDeFila = LlenarArrayObj("Prefabs/Repeticion/filas");
 
-        auxVector = new GameObject[2,9]; //quiero dos arrays de 9 slots
-        PrimeraFila = new GameObject[2, 9];
-        SegundaFila = new GameObject[2, 9];
+
+
+
+        auxVector = new GameObject[3,9]; //quiero dos arrays de 9 slots
+        PrimeraFila = new GameObject[3, 9];
+        SegundaFila = new GameObject[3, 9];
+        TerceraFila = new GameObject[3, 9];
+        CuartaFila = new GameObject[3, 9];
 
     }
     //singelton
@@ -45,9 +68,13 @@ public class Rep1 : MonoBehaviour
         arrayObject = LlenarArrayObj("Prefabs/Repeticion/ImagesChilds");
         
         PrimeraFila=LlenarArrayFilas(PrimeraFila, "primerafila");
-
-        //SegundaFila=LlenarArrayFilas(SegundaFila, "segundafila");
-        
+        ImprimirFila(PrimeraFila, 0);
+        SegundaFila =LlenarArrayFilas(SegundaFila, "segundafila");
+        ImprimirFila(SegundaFila, 1);
+        TerceraFila = LlenarArrayFilas(TerceraFila, "tercerafila");
+        ImprimirFila(TerceraFila, 2);
+        CuartaFila = LlenarArrayFilas(CuartaFila, "cuartafila");
+        ImprimirFila(CuartaFila, 3);
 
 
         //for(int i = 0; i <= 4; i ++)
@@ -62,10 +89,7 @@ public class Rep1 : MonoBehaviour
 
 
 
-        Debug.Log("primera fila");
-        ImprimirFila(PrimeraFila,0);
-        //ImprimirFila(SegundaFila,1);
-        Debug.Log("impresos");
+
     }
     
     // Start is called before the first frame update
@@ -174,7 +198,7 @@ public class Rep1 : MonoBehaviour
 
         for (int i = 0; i <= 4; i++)
         {
-            Debug.Log("Array a llenar:  aLLenar[0,"+ i + " ]" + aLLenar[0, i]);
+            Debug.Log("Array a llenar:  aLLenar[0,"+ i + " ]" + aLLenar[0, i] + " tag " + aLLenar[0, i].tag);
         }
         Debug.Log("Fin a llenar");
         return aLLenar;
@@ -204,5 +228,21 @@ public class Rep1 : MonoBehaviour
        
     }
 
+    public void resetSpritesInRow(GameObject[,] fila)
+    {
+        GameObject child;
+        for (int i = 0; i <= 4; i++)
+        {
+            child = fila[0, i].transform.Find("Child").gameObject;
+            child.GetComponent<SpriteRenderer>().enabled = false;
+            Debug.Log("fila[0," + i +"] "+ fila[0, i] );
+            Debug.Log("child " + child.GetComponent<SpriteRenderer>().enabled + "  "+child.name);
+        }
+    }
+
+    public void checkFila()
+    {
+        
+    }
 
 }
