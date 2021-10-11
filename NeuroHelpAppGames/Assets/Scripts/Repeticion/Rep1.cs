@@ -17,11 +17,6 @@ public class Rep1 : MonoBehaviour
     public GameObject[] auxArray;
     public GameObject[,] auxVector;
 
-    public GameObject objetoPrimerafila;
-    public GameObject objetoSegindafila;
-    public GameObject objetoTercerafila;
-    public GameObject objetoCuartafila;
-
     public int contPrimFila=0;
     public int contSegFila = 0;
     public int contTerFila = 0;
@@ -33,6 +28,8 @@ public class Rep1 : MonoBehaviour
     public GameObject[,] TerceraFila;
     public GameObject[,] CuartaFila;
 
+    public GameObject SearchObjPhrase;
+    public GameObject felicitacionesImage;
     //singelton
     private void Awake()
     {
@@ -101,7 +98,21 @@ public class Rep1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if ((contPrimFila == 3)&&( contSegFila ==3) &&(contTerFila ==3) &&(contCuarFila == 3))
+        {
+            felicitacionesImage.SetActive(true);
+            DestroyObjects("primerafila");
+            DestroyObjects("segundafila");
+            DestroyObjects("tercerafila");
+            DestroyObjects("cuartafila");
+            SearchObjPhrase.gameObject.SetActive(false);
+            Debug.Log("Fin Rep1");
+
+            /*
+            StartCoroutine(GameManager.GetInstance().FelicidadesWait(GameState.InicioVowelGame));
+            GameManager.GetInstance().GetComponent<ImageGame>().enabled = false;
+            */
+        }
     }
 
 
@@ -228,21 +239,20 @@ public class Rep1 : MonoBehaviour
        
     }
 
-    public void resetSpritesInRow(GameObject[,] fila)
-    {
-        GameObject child;
-        for (int i = 0; i <= 4; i++)
-        {
-            child = fila[0, i].transform.Find("Child").gameObject;
-            child.GetComponent<SpriteRenderer>().enabled = false;
-            Debug.Log("fila[0," + i +"] "+ fila[0, i] );
-            Debug.Log("child " + child.GetComponent<SpriteRenderer>().enabled + "  "+child.name);
-        }
-    }
-
-    public void checkFila()
+    private void DestroyObjects(string tag)
     {
         
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
+       
+
+        foreach (GameObject target in gameObjects)
+        {
+            GameObject.Destroy(target);
+        }
+
+
+
     }
+
 
 }
