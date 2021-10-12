@@ -9,6 +9,7 @@ TagManager:
   - segundafila
   - tercerafila
   - cuartafila
+  - quintafila
   layers:
   - Default
   - TransparentFX

@@ -65,21 +65,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Aqui manejo los estados
-    }
-
-    // Called when palyer dies
-    public void GameOver()
-    {
-       
-      //  ChangeGameState(GameState.GameOver);
         
     }
-    //Called when player quit the game and go to the main menu
-    public void BackToMainMenu()
-    {
-    //    ChangeGameState(GameState.Menu);
-    }
+
+  
 
     public void RepeatGames()
     {

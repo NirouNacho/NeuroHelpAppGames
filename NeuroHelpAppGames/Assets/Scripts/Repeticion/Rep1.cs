@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Rep1 : MonoBehaviour
@@ -46,7 +47,7 @@ public class Rep1 : MonoBehaviour
 
 
 
-        auxVector = new GameObject[3,9]; //quiero dos arrays de 9 slots
+        auxVector = new GameObject[3,9]; //quiero tres arrays de 9 slots
         PrimeraFila = new GameObject[3, 9];
         SegundaFila = new GameObject[3, 9];
         TerceraFila = new GameObject[3, 9];
@@ -67,25 +68,11 @@ public class Rep1 : MonoBehaviour
         PrimeraFila=LlenarArrayFilas(PrimeraFila, "primerafila");
         ImprimirFila(PrimeraFila, 0);
         SegundaFila =LlenarArrayFilas(SegundaFila, "segundafila");
-        ImprimirFila(SegundaFila, 1);
+        ImprimirFila(SegundaFila, 0);
         TerceraFila = LlenarArrayFilas(TerceraFila, "tercerafila");
         ImprimirFila(TerceraFila, 2);
         CuartaFila = LlenarArrayFilas(CuartaFila, "cuartafila");
         ImprimirFila(CuartaFila, 3);
-
-
-        //for(int i = 0; i <= 4; i ++)
-        //{
-        //    Debug.Log("Array 1: " + PrimeraFila[0, i]);
-        //}
-
-        //for (int i = 0; i <= 4; i++)
-        //{
-        //    Debug.Log("Array 2: " + SegundaFila[0, i]);
-        //}
-
-
-
 
     }
     
@@ -129,7 +116,7 @@ public class Rep1 : MonoBehaviour
         
     }
 
-    //llena una fila con dos prefabas que se repiten y los otros y guarda el rabdom escogido
+    //llena una fila con dos prefabs que se repiten y los otros y guarda el rabdom escogido
     //en [1][0]
     public GameObject[,] LlenarArrayFilas(GameObject[,] aLLenar,string tag)
     {
