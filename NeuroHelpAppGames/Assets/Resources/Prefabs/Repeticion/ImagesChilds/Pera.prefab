@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3510814163995035981}
   m_Layer: 0
   m_Name: Pera
-  m_TagString: segundafila
+  m_TagString: tercerafila
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

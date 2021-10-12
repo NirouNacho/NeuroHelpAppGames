@@ -68,7 +68,7 @@ public class Rep1 : MonoBehaviour
         PrimeraFila=LlenarArrayFilas(PrimeraFila, "primerafila");
         ImprimirFila(PrimeraFila, 0);
         SegundaFila =LlenarArrayFilas(SegundaFila, "segundafila");
-        ImprimirFila(SegundaFila, 0);
+        ImprimirFila(SegundaFila, 1);
         TerceraFila = LlenarArrayFilas(TerceraFila, "tercerafila");
         ImprimirFila(TerceraFila, 2);
         CuartaFila = LlenarArrayFilas(CuartaFila, "cuartafila");

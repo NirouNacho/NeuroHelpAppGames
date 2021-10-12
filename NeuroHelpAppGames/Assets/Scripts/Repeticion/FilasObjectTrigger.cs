@@ -59,70 +59,85 @@ public class FilasObjectTrigger : MonoBehaviour
                     {
                         case "primerafila":
 
-                            if(Rep1.GetInstance().contPrimFila == 0)
+                            if(Rep2.GetInstance().contPrimCol == 0)
                             {
                                 TurnOnSquare();
-                                Rep1.GetInstance().PrimeraFila[1,1]=gameObject;
-                                Rep1.GetInstance().contPrimFila++;
+                                Rep2.GetInstance().PrimeraCol[1,1]=gameObject;
+                                Rep2.GetInstance().contPrimCol++;
                                 collider.enabled = false;
                             }
-                            else if (Rep1.GetInstance().contPrimFila==1)
+                            else if (Rep2.GetInstance().contPrimCol==1)
                             {
-                                Rep1.GetInstance().PrimeraFila[1, 2] = gameObject;
-                                Rep1.GetInstance().contPrimFila++;
+                                Rep2.GetInstance().PrimeraCol[1, 2] = gameObject;
+                                Rep2.GetInstance().contPrimCol++;
                             }
-                            Debug.Log("PrimeraFila[1,1]: "+ Rep1.GetInstance().PrimeraFila[1, 1]);
-                            Debug.Log("PrimeraFila[1,2]: " + Rep1.GetInstance().PrimeraFila[1, 2]);
-                            break;
+                             break;
 
                         case "segundafila":
 
-                            if (Rep1.GetInstance().contSegFila == 0)
+                            if (Rep2.GetInstance().contSegCol == 0)
                             {
                                 TurnOnSquare();
-                                Rep1.GetInstance().SegundaFila[1, 1] = gameObject;
-                                Rep1.GetInstance().contSegFila++;
+                                Rep2.GetInstance().SegundaCol[1, 1] = gameObject;
+                                Rep2.GetInstance().contSegCol++;
                                 collider.enabled = false;
 
                             }
-                            else if (Rep1.GetInstance().contSegFila == 1)
+                            else if (Rep2.GetInstance().contSegCol == 1)
                             {
-                                Rep1.GetInstance().SegundaFila[1, 2] = gameObject;
-                                Rep1.GetInstance().contSegFila++;
+                                Rep2.GetInstance().SegundaCol[1, 2] = gameObject;
+                                Rep2.GetInstance().contSegCol++;
                             }
 
                             break;
 
                         case "tercerafila":
 
-                            if (Rep1.GetInstance().contTerFila == 0)
+                            if (Rep2.GetInstance().contTerCol == 0)
                             {
                                 TurnOnSquare();
-                                Rep1.GetInstance().TerceraFila[1, 1] = gameObject;
-                                Rep1.GetInstance().contTerFila++;
+                                Rep2.GetInstance().TerceraCol[1, 1] = gameObject;
+                                Rep2.GetInstance().contTerCol++;
                                 collider.enabled = false;
                             }
-                            else if (Rep1.GetInstance().contTerFila == 1)
+                            else if (Rep2.GetInstance().contTerCol == 1)
                             {
-                                Rep1.GetInstance().TerceraFila[1, 2] = gameObject;
-                                Rep1.GetInstance().contTerFila++;
+                                Rep2.GetInstance().TerceraCol[1, 2] = gameObject;
+                                Rep2.GetInstance().contTerCol++;
                             }
 
                             break;
 
                         case "cuartafila":
 
-                            if (Rep1.GetInstance().contCuarFila == 0)
+                            if (Rep2.GetInstance().contCuarCol == 0)
                             {
                                 TurnOnSquare();
-                                Rep1.GetInstance().CuartaFila[1, 1] = gameObject;
-                                Rep1.GetInstance().contCuarFila++;
+                                Rep2.GetInstance().CuartaCol[1, 1] = gameObject;
+                                Rep2.GetInstance().contCuarCol++;
                                 collider.enabled = false;
                             }
-                            else if (Rep1.GetInstance().contCuarFila == 1)
+                            else if (Rep2.GetInstance().contCuarCol == 1)
                             {
-                                Rep1.GetInstance().CuartaFila[1, 2] = gameObject;
-                                Rep1.GetInstance().contCuarFila++;
+                                Rep2.GetInstance().CuartaCol[1, 2] = gameObject;
+                                Rep2.GetInstance().contCuarCol++;
+                            }
+
+                            break;
+
+                        case "quintafila":
+
+                            if (Rep2.GetInstance().contQuinCol == 0)
+                            {
+                                TurnOnSquare();
+                                Rep2.GetInstance().QuintaCol[1, 1] = gameObject;
+                                Rep2.GetInstance().contQuinCol++;
+                                collider.enabled = false;
+                            }
+                            else if (Rep2.GetInstance().contQuinCol == 1)
+                            {
+                                Rep2.GetInstance().QuintaCol[1, 2] = gameObject;
+                                Rep2.GetInstance().contQuinCol++;
                             }
 
                             break;
@@ -143,39 +158,38 @@ public class FilasObjectTrigger : MonoBehaviour
         switch(objectTag)
         {
             case "primerafila":
-                if (Rep1.GetInstance().contPrimFila == 2)
+                if (Rep2.GetInstance().contPrimCol == 2)
                 {
-                    if (Rep1.GetInstance().PrimeraFila[1, 1].name == Rep1.GetInstance().PrimeraFila[1, 2].name)
+                    if (Rep2.GetInstance().PrimeraCol[1, 1].name == Rep2.GetInstance().PrimeraCol[1, 2].name)
                     {
-                        Debug.Log("Son igualeslos objetos");
-                        Debug.Log("Pintalos verdes");
-                        if (gameObject.name == Rep1.GetInstance().PrimeraFila[1, 1].name)
+                    
+                        if (gameObject.name == Rep2.GetInstance().PrimeraCol[1, 1].name)
                         {
                             TurnOffSquare();
                             TurnOnCheck();
                         }
-                        Rep1.GetInstance().contPrimFila = 3;
+                        Rep2.GetInstance().contPrimCol = 3;
                     }
                     else
                     {
-                        if ((gameObject.name == Rep1.GetInstance().PrimeraFila[1, 1].name) && (collider.enabled == false))
+                        if ((gameObject.name == Rep2.GetInstance().PrimeraCol[1, 1].name) && (collider.enabled == false))
                         {
                             TurnOffSquare();
                             collider.enabled = true;
-                            if (gameObject.name == Rep1.GetInstance().PrimeraFila[1, 1].name)
+                            if (gameObject.name == Rep2.GetInstance().PrimeraCol[1, 1].name)
                             {
                                 TurnOffSquare();
                                 collider.enabled = true;
                             }
-                            Rep1.GetInstance().contPrimFila = 0;
+                            Rep2.GetInstance().contPrimCol = 0;
                         }    
                     }
                 //desactivar fila
                 //con el estado 3 no entra en el touch y es como si estuviera desactivado.
                 }
-                if(Rep1.GetInstance().contPrimFila == 3)
+                if(Rep2.GetInstance().contPrimCol == 3)
                 {
-                    if ((gameObject.name == Rep1.GetInstance().PrimeraFila[1, 1].name)&&(childSpriteRenderer.enabled==true))
+                    if ((gameObject.name == Rep2.GetInstance().PrimeraCol[1, 1].name)&&(childSpriteRenderer.enabled==true))
                     {
                         TurnOffSquare();
                         TurnOnCheck();    
@@ -184,41 +198,40 @@ public class FilasObjectTrigger : MonoBehaviour
                 break;
 
             case "segundafila":
-                if (Rep1.GetInstance().contSegFila == 2)
+                if (Rep2.GetInstance().contSegCol == 2)
                 {
 
-                    if (Rep1.GetInstance().SegundaFila[1, 1].name == Rep1.GetInstance().SegundaFila[1, 2].name)
+                    if (Rep2.GetInstance().SegundaCol[1, 1].name == Rep2.GetInstance().SegundaCol[1, 2].name)
                     {
-                        Debug.Log("Son igualeslos objetos");
-                        Debug.Log("Pintalos verdes");
-                        if (gameObject.name == Rep1.GetInstance().SegundaFila[1, 1].name)
+    
+                        if (gameObject.name == Rep2.GetInstance().SegundaCol[1, 1].name)
                         {
                             TurnOffSquare();
                             TurnOnCheck();
                         }
-                        Rep1.GetInstance().contSegFila = 3;
+                        Rep2.GetInstance().contSegCol = 3;
                     }
                     else
                     {
-                        if ((gameObject.name == Rep1.GetInstance().SegundaFila[1, 1].name) && (collider.enabled == false))
+                        if ((gameObject.name == Rep2.GetInstance().SegundaCol[1, 1].name) && (collider.enabled == false))
                         {
                             TurnOffSquare();
                             collider.enabled = true;
-                            if (gameObject.name == Rep1.GetInstance().SegundaFila[1, 1].name)
+                            if (gameObject.name == Rep2.GetInstance().SegundaCol[1, 1].name)
                             {
                                 TurnOffSquare();
                                 collider.enabled = true;
                             }
-                            Rep1.GetInstance().contSegFila = 0;
+                            Rep2.GetInstance().contSegCol = 0;
                         }
                     }
 
                     //desactivar fila
                     //con el estado 3 no entra en el touch y es como si estuviera desactivado.
                 }
-                if (Rep1.GetInstance().contSegFila == 3)
+                if (Rep2.GetInstance().contSegCol == 3)
                 {
-                    if ((gameObject.name == Rep1.GetInstance().SegundaFila[1, 1].name) && (childSpriteRenderer.enabled == true))
+                    if ((gameObject.name == Rep2.GetInstance().SegundaCol[1, 1].name) && (childSpriteRenderer.enabled == true))
                     {
                         TurnOffSquare();
                         TurnOnCheck();
@@ -229,41 +242,37 @@ public class FilasObjectTrigger : MonoBehaviour
                 break;
 
             case "tercerafila":
-                if (Rep1.GetInstance().contTerFila == 2)
+                if (Rep2.GetInstance().contTerCol == 2)
                 {
 
-                    if (Rep1.GetInstance().TerceraFila[1, 1].name == Rep1.GetInstance().TerceraFila[1, 2].name)
+                    if (Rep2.GetInstance().TerceraCol[1, 1].name == Rep2.GetInstance().TerceraCol[1, 2].name)
                     {
-                        Debug.Log("Son igualeslos objetos");
-                        Debug.Log("Pintalos verdes");
-                        if (gameObject.name == Rep1.GetInstance().TerceraFila[1, 1].name)
+
+                        if (gameObject.name == Rep2.GetInstance().TerceraCol[1, 1].name)
                         {
                             TurnOffSquare();
                             TurnOnCheck();
                         }
-                        Rep1.GetInstance().contTerFila = 3;
+                        Rep2.GetInstance().contTerCol = 3;
                     }
                     else
                     {
-                        if ((gameObject.name == Rep1.GetInstance().TerceraFila[1, 1].name) && (collider.enabled == false))
+                        if ((gameObject.name == Rep2.GetInstance().TerceraCol[1, 1].name) && (collider.enabled == false))
                         {
                             TurnOffSquare();
                             collider.enabled = true;
-                            if (gameObject.name == Rep1.GetInstance().TerceraFila[1, 1].name)
+                            if (gameObject.name == Rep2.GetInstance().TerceraCol[1, 1].name)
                             {
                                 TurnOffSquare();
                                 collider.enabled = true;
                             }
-                            Rep1.GetInstance().contTerFila = 0;
+                            Rep2.GetInstance().contTerCol = 0;
                         }
                     }
-
-                    //desactivar fila
-                    //con el estado 3 no entra en el touch y es como si estuviera desactivado.
                 }
-                if (Rep1.GetInstance().contTerFila == 3)
+                if (Rep2.GetInstance().contTerCol == 3)
                 {
-                    if ((gameObject.name == Rep1.GetInstance().TerceraFila[1, 1].name) && (childSpriteRenderer.enabled == true))
+                    if ((gameObject.name == Rep2.GetInstance().TerceraCol[1, 1].name) && (childSpriteRenderer.enabled == true))
                     {
                         TurnOffSquare();
                         TurnOnCheck();
@@ -274,41 +283,80 @@ public class FilasObjectTrigger : MonoBehaviour
                 break;
 
             case "cuartafila":
-                if (Rep1.GetInstance().contCuarFila == 2)
+                if (Rep2.GetInstance().contCuarCol == 2)
                 {
 
-                    if (Rep1.GetInstance().CuartaFila[1, 1].name == Rep1.GetInstance().CuartaFila[1, 2].name)
+                    if (Rep2.GetInstance().CuartaCol[1, 1].name == Rep2.GetInstance().CuartaCol[1, 2].name)
                     {
-                        Debug.Log("Son igualeslos objetos");
-                        Debug.Log("Pintalos verdes");
-                        if (gameObject.name == Rep1.GetInstance().CuartaFila[1, 1].name)
+
+                        if (gameObject.name == Rep2.GetInstance().CuartaCol[1, 1].name)
                         {
                             TurnOffSquare();
                             TurnOnCheck();
                         }
-                        Rep1.GetInstance().contCuarFila = 3;
+                        Rep2.GetInstance().contCuarCol = 3;
                     }
                     else
                     {
-                        if ((gameObject.name == Rep1.GetInstance().CuartaFila[1, 1].name) && (collider.enabled == false))
+                        if ((gameObject.name == Rep2.GetInstance().CuartaCol[1, 1].name) && (collider.enabled == false))
                         {
                             TurnOffSquare();
                             collider.enabled = true;
-                            if (gameObject.name == Rep1.GetInstance().CuartaFila[1, 1].name)
+                            if (gameObject.name == Rep2.GetInstance().CuartaCol[1, 1].name)
                             {
                                 TurnOffSquare();
                                 collider.enabled = true;
                             }
-                            Rep1.GetInstance().contCuarFila = 0;
+                            Rep2.GetInstance().contCuarCol = 0;
                         }
                     }
 
-                    //desactivar fila
-                    //con el estado 3 no entra en el touch y es como si estuviera desactivado.
                 }
-                if (Rep1.GetInstance().contCuarFila == 3)
+                if (Rep2.GetInstance().contCuarCol == 3)
                 {
-                    if ((gameObject.name == Rep1.GetInstance().CuartaFila[1, 1].name) && (childSpriteRenderer.enabled == true))
+                    if ((gameObject.name == Rep2.GetInstance().CuartaCol[1, 1].name) && (childSpriteRenderer.enabled == true))
+                    {
+                        TurnOffSquare();
+                        TurnOnCheck();
+
+                    }
+                }
+
+                break;
+
+            case "quintafila":
+                if (Rep2.GetInstance().contQuinCol == 2)
+                {
+
+                    if (Rep2.GetInstance().QuintaCol[1, 1].name == Rep2.GetInstance().QuintaCol[1, 2].name)
+                    {
+
+                        if (gameObject.name == Rep2.GetInstance().QuintaCol[1, 1].name)
+                        {
+                            TurnOffSquare();
+                            TurnOnCheck();
+                        }
+                        Rep2.GetInstance().contQuinCol = 3;
+                    }
+                    else
+                    {
+                        if ((gameObject.name == Rep2.GetInstance().QuintaCol[1, 1].name) && (collider.enabled == false))
+                        {
+                            TurnOffSquare();
+                            collider.enabled = true;
+                            if (gameObject.name == Rep2.GetInstance().QuintaCol[1, 1].name)
+                            {
+                                TurnOffSquare();
+                                collider.enabled = true;
+                            }
+                            Rep2.GetInstance().contQuinCol = 0;
+                        }
+                    }
+
+                }
+                if (Rep2.GetInstance().contQuinCol == 3)
+                {
+                    if ((gameObject.name == Rep2.GetInstance().QuintaCol[1, 1].name) && (childSpriteRenderer.enabled == true))
                     {
                         TurnOffSquare();
                         TurnOnCheck();

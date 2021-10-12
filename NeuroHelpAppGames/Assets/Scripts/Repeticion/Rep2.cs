@@ -51,7 +51,7 @@ public class Rep2 : MonoBehaviour
         contQuinCol = 0;
 
 
-        ObjfondoDeFila = LlenarArrayObj("Prefabs/Repeticion/filas");
+        ObjfondoDeFila = LlenarArrayObj("Prefabs/Repeticion/columnas");
 
 
 
@@ -98,13 +98,28 @@ public class Rep2 : MonoBehaviour
 
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if ((contPrimCol == 3) && (contSegCol == 3) && (contTerCol == 3) && (contCuarCol == 3) && (contQuinCol == 3))
+        {
+            felicitacionesImage.SetActive(true);
+            DestroyObjects("primerafila");
+            DestroyObjects("segundafila");
+            DestroyObjects("tercerafila");
+            DestroyObjects("cuartafila");
+            DestroyObjects("quintafila");
+            SearchObjPhrase.gameObject.SetActive(false);
+            Debug.Log("Fin Rep2");
+
+            /*
+            StartCoroutine(GameManager.GetInstance().FelicidadesWait(GameState.InicioVowelGame));
+            GameManager.GetInstance().GetComponent<ImageGame>().enabled = false;
+            */
+        }
     }
 
     //llena el array de prefabs desde una direccion
@@ -205,8 +220,9 @@ public class Rep2 : MonoBehaviour
 
     private void ImprimirFila(GameObject[,] aImprimir, int posInicial)
     {
-        //GameObject filaObject = Instantiate(ObjfondoDeFila[0]);
-        //filaObject.transform.position = new Vector3(1.621f, (posInicial * 2) - 4, 1);
+        GameObject filaObject = Instantiate(ObjfondoDeFila[0]);
+        filaObject.transform.position = new Vector3((posInicial * 2) - 4, -0.5f, 1.0f);
+        
         for (int i = 0; i <= 3; i++)//4 colums
         {
             Spawnfile(i, posInicial, aImprimir);
