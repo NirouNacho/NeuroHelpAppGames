@@ -41,8 +41,9 @@ public class GameManagerRepeticion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // Rep1.GetInstance().StartRep1Game();
-        Rep2.GetInstance().StartRep2Game();
+        // Rep1.GetInstance().StartRep1Game();
+        //Rep2.GetInstance().StartRep2Game();
+        Rep3.GetInstance().StartRep3Game();
         //currentGameState = GameState.InicioImgGame;
         //Poner aqui la fase inicial del canvas
         //I1erJuego.enabled = true;

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Rep2 : MonoBehaviour
+
+public class Rep3 : MonoBehaviour
 {
 
     //singleton
-    private static Rep2 sharedInstance;
-
-    // Start is called before the first frame update
+    private static Rep3 sharedInstance;
 
     public GameObject[] arrayObject;
     GameObject[] ObjfondoDeFila;
@@ -19,76 +17,54 @@ public class Rep2 : MonoBehaviour
     public GameObject[] auxArray;
     public GameObject[,] auxVector;
 
-    public int contPrimCol = 0;
-    public int contSegCol = 0;
-    public int contTerCol = 0;
-    public int contCuarCol = 0;
-    public int contQuinCol = 0;
+    public int contTabla = 0;
+    
 
-    public GameObject[,] PrimeraCol;
-    public GameObject[,] SegundaCol;
-    public GameObject[,] TerceraCol;
-    public GameObject[,] CuartaCol;
-    public GameObject[,] QuintaCol;
+    public GameObject[,] ArrayTabla;
+   
 
     public GameObject SearchObjPhrase;
     public GameObject felicitacionesImage;
 
+
     private void Awake()
     {
+
         sharedInstance = this;
-
-        contPrimCol = 0;
-        contSegCol = 0;
-        contTerCol = 0;
-        contCuarCol = 0;
-        contQuinCol = 0;
+        contTabla = 0;
+       
 
 
-        ObjfondoDeFila = LlenarArrayObj("Prefabs/Repeticion/columnas");
+        ObjfondoDeFila = LlenarArrayObj("Prefabs/Repeticion/tabla");
 
 
 
 
         auxVector = new GameObject[3, 9]; //quiero dos arrays de 9 slots
-        PrimeraCol = new GameObject[3, 9];
-        SegundaCol = new GameObject[3, 9];
-        TerceraCol = new GameObject[3, 9];
-        CuartaCol = new GameObject[3, 9];
-        QuintaCol = new GameObject[3, 9];
+        ArrayTabla = new GameObject[3, 9];
+        
     }
-
+    
     //singelton
-    public static Rep2 GetInstance()
+    public static Rep3 GetInstance()
     {
         return sharedInstance;
     }
 
-
-    public void StartRep2Game()
+    public void StartRep3Game()
     {
         arrayObject = LlenarArrayObj("Prefabs/Repeticion/ImagesChilds");
 
-        PrimeraCol = LlenarArrayColumnas(PrimeraCol, "primerafila");
-        ImprimirFila(PrimeraCol, 0);
-        SegundaCol = LlenarArrayColumnas(SegundaCol, "segundafila");
-        ImprimirFila(SegundaCol, 1);
-        TerceraCol = LlenarArrayColumnas(TerceraCol, "tercerafila");
-        ImprimirFila(TerceraCol, 2);
-        CuartaCol = LlenarArrayColumnas(CuartaCol, "cuartafila");
-        ImprimirFila(CuartaCol, 3);
-        QuintaCol = LlenarArrayColumnas(QuintaCol, "quintafila");
-        ImprimirFila(QuintaCol, 4);
-
-
-
+        ArrayTabla = LlenarArray(ArrayTabla, "primerafila");
+        ImprimirTabla(ArrayTabla, 0);
+      
     }
 
 
-
+    // Start is called before the first frame update
     void Start()
     {
-       
+        
     }
 
     // Update is called once per frame
@@ -97,13 +73,9 @@ public class Rep2 : MonoBehaviour
         if ((contPrimCol == 3) && (contSegCol == 3) && (contTerCol == 3) && (contCuarCol == 3) && (contQuinCol == 3))
         {
             felicitacionesImage.SetActive(true);
-            DestroyObjects("primerafila");
-            DestroyObjects("segundafila");
-            DestroyObjects("tercerafila");
-            DestroyObjects("cuartafila");
-            DestroyObjects("quintafila");
+            DestroyObjects("primerafila");  
             SearchObjPhrase.gameObject.SetActive(false);
-            Debug.Log("Fin Rep2");
+            Debug.Log("Fin Rep3");
 
             /*
             StartCoroutine(GameManager.GetInstance().FelicidadesWait(GameState.InicioVowelGame));
@@ -112,7 +84,6 @@ public class Rep2 : MonoBehaviour
         }
     }
 
-    //llena el array de prefabs desde una direccion
     public GameObject[] LlenarArrayObj(string direccion)
     {
         return arrayObject = Resources.LoadAll<GameObject>(direccion);
@@ -124,7 +95,7 @@ public class Rep2 : MonoBehaviour
 
     }
 
-    public GameObject[,] LlenarArrayColumnas(GameObject[,] aLLenar, string tag)
+    public GameObject[,] LlenarArray(GameObject[,] aLLenar, string tag)
     {
         aLLenar = new GameObject[2, 9];
         GameObject auxObj;
@@ -136,11 +107,11 @@ public class Rep2 : MonoBehaviour
 
         // lleno los dos que se repiten
 
-        int randoma = UnityEngine.Random.Range(0, 4);
-        int randomb = UnityEngine.Random.Range(0, 4);
+        int randoma = UnityEngine.Random.Range(0, 8);
+        int randomb = UnityEngine.Random.Range(0, 8);
         while (randoma == randomb)
         {
-            randomb = UnityEngine.Random.Range(0, 4);
+            randomb = UnityEngine.Random.Range(0, 8);
         }
         auxObj.tag = tag;
         aLLenar[0, randoma] = auxObj;
@@ -152,9 +123,9 @@ public class Rep2 : MonoBehaviour
 
 
 
-        //lleno los otros tres
+        //lleno el resto
 
-        for (int y = 0; y <= 3; y++) //hago 4 veces
+        for (int y = 0; y <= 8; y++) //hago 9 veces
         {
             int a = UnityEngine.Random.Range(0, 9);
             auxObj = arrayObject[a];
@@ -200,7 +171,7 @@ public class Rep2 : MonoBehaviour
 
         }
 
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= 8; i++)
         {
             Debug.Log("Array a llenar:  aLLenar[0," + i + " ]" + aLLenar[0, i] + " tag " + aLLenar[0, i].tag);
         }
@@ -208,27 +179,26 @@ public class Rep2 : MonoBehaviour
         return aLLenar;
     }
 
-    private void ImprimirFila(GameObject[,] aImprimir, int posInicial)
+    private void ImprimirTabla(GameObject[,] aImprimir, int posInicial)
     {
         GameObject filaObject = Instantiate(ObjfondoDeFila[0]);
-        filaObject.transform.position = new Vector3((posInicial * 2) - 4, -0.5f, 1.0f);
-        
-        for (int i = 0; i <= 3; i++)//4 colums
+        GameObject g;
+        int j = 0;
+        int x = 1;
+        for (int i = 0; i <= 8; i++)
         {
-            Spawnfile(i, posInicial, aImprimir);
+            g = Instantiate(aImprimir[0,i]);
+            
+            if (i % 3 == 0)
+            {
+                j++;
+                x = 1;
+            }
+                g.transform.position = new Vector3((x * 2.0f)-3, (j * 2) - 4.5f);
+            x ++;
+
         }
-
-    }
-
-    private void Spawnfile(int x, int y, GameObject[,] aImprimir)
-    {
-        int columns = 5;
-        int rows = 4;
-
-        GameObject g = Instantiate(aImprimir[0, x]);
-
-        g.transform.position = new Vector3( (y * 2) - (columns - 1), (x * 2.0f) - (rows - 0.5f));
-
+            
 
     }
 
@@ -246,7 +216,5 @@ public class Rep2 : MonoBehaviour
 
 
     }
-
-
 
 }

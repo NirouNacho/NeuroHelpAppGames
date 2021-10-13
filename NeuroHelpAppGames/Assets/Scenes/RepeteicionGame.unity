@@ -500,6 +500,7 @@ GameObject:
   - component: {fileID: 1599842777}
   - component: {fileID: 1599842776}
   - component: {fileID: 1599842778}
+  - component: {fileID: 1599842779}
   m_Layer: 0
   m_Name: GameManagerRep
   m_TagString: Untagged
@@ -563,7 +564,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599842774}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 463a249f17a747544973eb02a83ec90f, type: 3}
   m_Name: 
@@ -576,6 +577,24 @@ MonoBehaviour:
   contTerCol: 0
   contCuarCol: 0
   contQuinCol: 0
+  SearchObjPhrase: {fileID: 3301691477299324708}
+  felicitacionesImage: {fileID: 5597469652858241054}
+--- !u!114 &1599842779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599842774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fe1eda91a45c84b82dda70199a1633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrayObject: []
+  auxDestroy: {fileID: 591864753}
+  auxArray: []
+  contTabla: 0
   SearchObjPhrase: {fileID: 3301691477299324708}
   felicitacionesImage: {fileID: 5597469652858241054}
 --- !u!1001 &1666940750
