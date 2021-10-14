@@ -67,6 +67,15 @@ public class Rep2 : MonoBehaviour
 
     public void StartRep2Game()
     {
+        contPrimCol = 0;
+        contSegCol = 0;
+        contTerCol = 0;
+        contCuarCol = 0;
+        contQuinCol = 0;
+
+        felicitacionesImage.SetActive(false);
+        SearchObjPhrase.SetActive(true);
+
         arrayObject = LlenarArrayObj("Prefabs/Repeticion/ImagesChilds");
 
         PrimeraCol = LlenarArrayColumnas(PrimeraCol, "primerafila");
@@ -80,7 +89,7 @@ public class Rep2 : MonoBehaviour
         QuintaCol = LlenarArrayColumnas(QuintaCol, "quintafila");
         ImprimirFila(QuintaCol, 4);
 
-
+        GameManagerRepeticion.GetInstance().StartRep2Game();
 
     }
 
@@ -105,10 +114,9 @@ public class Rep2 : MonoBehaviour
             SearchObjPhrase.gameObject.SetActive(false);
             Debug.Log("Fin Rep2");
 
-            /*
-            StartCoroutine(GameManager.GetInstance().FelicidadesWait(GameState.InicioVowelGame));
-            GameManager.GetInstance().GetComponent<ImageGame>().enabled = false;
-            */
+            StartCoroutine(GameManagerRepeticion.GetInstance().FelicidadesWait(GameStateRep.InicioRep3));
+            GameManagerRepeticion.GetInstance().GetComponent<Rep2>().enabled = false;
+
         }
     }
 

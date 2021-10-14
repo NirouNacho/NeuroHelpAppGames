@@ -3294,7 +3294,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "A continuaci\xF3n encuentra todos los n\xFAmerosiguales que te pida :"
+  m_Text: "A continuaci\xF3n encuentra todos los n\xFAmeros iguales que te pida :"
 --- !u!222 &1643077227
 CanvasRenderer:
   m_ObjectHideFlags: 0

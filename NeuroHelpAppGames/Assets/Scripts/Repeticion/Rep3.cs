@@ -17,7 +17,7 @@ public class Rep3 : MonoBehaviour
     public GameObject[] auxArray;
     public GameObject[,] auxVector;
 
-    public int contTabla = 0;
+    public int contPrimCol = 0;
     
 
     public GameObject[,] ArrayTabla;
@@ -31,7 +31,7 @@ public class Rep3 : MonoBehaviour
     {
 
         sharedInstance = this;
-        contTabla = 0;
+        contPrimCol = 0;
        
 
 
@@ -53,11 +53,16 @@ public class Rep3 : MonoBehaviour
 
     public void StartRep3Game()
     {
+        Rep2.GetInstance().contPrimCol = 0;
+        felicitacionesImage.SetActive(false);
+        SearchObjPhrase.SetActive(true);
+
         arrayObject = LlenarArrayObj("Prefabs/Repeticion/ImagesChilds");
 
         ArrayTabla = LlenarArray(ArrayTabla, "primerafila");
         ImprimirTabla(ArrayTabla, 0);
-      
+
+        GameManagerRepeticion.GetInstance().StartRep3Game();
     }
 
 
@@ -70,17 +75,16 @@ public class Rep3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((contPrimCol == 3) && (contSegCol == 3) && (contTerCol == 3) && (contCuarCol == 3) && (contQuinCol == 3))
+        if (Rep2.GetInstance().contPrimCol == 3)
         {
             felicitacionesImage.SetActive(true);
             DestroyObjects("primerafila");  
             SearchObjPhrase.gameObject.SetActive(false);
             Debug.Log("Fin Rep3");
 
-            /*
-            StartCoroutine(GameManager.GetInstance().FelicidadesWait(GameState.InicioVowelGame));
-            GameManager.GetInstance().GetComponent<ImageGame>().enabled = false;
-            */
+            StartCoroutine(GameManagerRepeticion.GetInstance().FelicidadesWait(GameStateRep.FinalRep));
+            GameManagerRepeticion.GetInstance().GetComponent<Rep3>().enabled = false;
+
         }
     }
 

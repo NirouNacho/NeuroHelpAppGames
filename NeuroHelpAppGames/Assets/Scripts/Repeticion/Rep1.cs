@@ -63,6 +63,14 @@ public class Rep1 : MonoBehaviour
 
     public void StartRep1Game()
     {
+        Rep2.GetInstance().contPrimCol = 0;
+        Rep2.GetInstance().contSegCol = 0;
+        Rep2.GetInstance().contTerCol = 0;
+        Rep2.GetInstance().contCuarCol = 0;
+
+        felicitacionesImage.SetActive(false);
+        SearchObjPhrase.SetActive(true);
+
         arrayObject = LlenarArrayObj("Prefabs/Repeticion/ImagesChilds");
         
         PrimeraFila=LlenarArrayFilas(PrimeraFila, "primerafila");
@@ -74,6 +82,7 @@ public class Rep1 : MonoBehaviour
         CuartaFila = LlenarArrayFilas(CuartaFila, "cuartafila");
         ImprimirFila(CuartaFila, 3);
 
+        GameManagerRepeticion.GetInstance().StartRep1Game();
     }
     
     // Start is called before the first frame update
@@ -85,7 +94,7 @@ public class Rep1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((contPrimFila == 3)&&( contSegFila ==3) &&(contTerFila ==3) &&(contCuarFila == 3))
+        if ((Rep2.GetInstance().contPrimCol == 3)&&(Rep2.GetInstance().contSegCol == 3) &&(Rep2.GetInstance().contTerCol == 3) &&(Rep2.GetInstance().contCuarCol == 3))
         {
             felicitacionesImage.SetActive(true);
             DestroyObjects("primerafila");
@@ -93,12 +102,12 @@ public class Rep1 : MonoBehaviour
             DestroyObjects("tercerafila");
             DestroyObjects("cuartafila");
             SearchObjPhrase.gameObject.SetActive(false);
+            
             Debug.Log("Fin Rep1");
-
-            /*
-            StartCoroutine(GameManager.GetInstance().FelicidadesWait(GameState.InicioVowelGame));
-            GameManager.GetInstance().GetComponent<ImageGame>().enabled = false;
-            */
+            
+            StartCoroutine(GameManagerRepeticion.GetInstance().FelicidadesWait(GameStateRep.InicioRep2));
+            GameManagerRepeticion.GetInstance().GetComponent<Rep1>().enabled = false;
+            
         }
     }
 
