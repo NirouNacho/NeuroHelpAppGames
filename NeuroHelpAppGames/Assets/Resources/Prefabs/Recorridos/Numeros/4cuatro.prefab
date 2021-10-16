@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9061191765789153490}
   - component: {fileID: 6052123698772774267}
-  - component: {fileID: 4729021740414764249}
+  - component: {fileID: 1468594122675531110}
   m_Layer: 0
-  m_Name: cuatro
+  m_Name: 4cuatro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,19 +83,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4729021740414764249
-CircleCollider2D:
+--- !u!135 &1468594122675531110
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3593710633696906858}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.66
+  m_Center: {x: 0, y: 0, z: 0}

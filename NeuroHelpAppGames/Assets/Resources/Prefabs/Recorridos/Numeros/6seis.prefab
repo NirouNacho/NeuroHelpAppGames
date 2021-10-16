@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2404505104449609688}
   - component: {fileID: 6028227590633683667}
-  - component: {fileID: 5855591377309750138}
+  - component: {fileID: 6236251296253148552}
   m_Layer: 0
-  m_Name: seis
+  m_Name: 6seis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,19 +82,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &5855591377309750138
-CircleCollider2D:
+--- !u!135 &6236251296253148552
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5977507314889440075}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.66
+  m_Center: {x: 0, y: 0, z: 0}
