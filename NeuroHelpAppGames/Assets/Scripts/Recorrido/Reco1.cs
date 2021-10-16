@@ -17,7 +17,7 @@ public class Reco1 : MonoBehaviour
     //objetos tocados
 
     GameObject primerTocado;
-    GameObject medioTocado;
+    public GameObject medioTocado;
     GameObject ultimoTocado;
 
     public int contObjeto;
@@ -83,6 +83,10 @@ public class Reco1 : MonoBehaviour
         if(Input.touchCount>0 && Input.touches[0].phase == TouchPhase.Stationary)
         {
             medioTocado=raycastToObject();
+            if ((medioTocado.name != objNumeros[contObjeto+1].name + "(Clone)")&& medioTocado.name != objNumeros[contObjeto].name + "(Clone)")
+            {
+                linea = null;
+            }
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -117,7 +121,7 @@ public class Reco1 : MonoBehaviour
 
     //devuelve el objeto tocado por raycast
 
-    private GameObject raycastToObject()
+    public GameObject raycastToObject()
     {
         GameObject tocadoObj ;
         Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
