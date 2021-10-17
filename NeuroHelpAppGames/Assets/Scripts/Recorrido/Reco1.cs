@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class Reco1 : MonoBehaviour
 
     Linea linea;
 
+    GameObject lineaActual;
+
     private static Reco1 sharedInstance;
 
     Vector3[] Recorrido1Positions;
@@ -16,9 +19,9 @@ public class Reco1 : MonoBehaviour
 
     //objetos tocados
 
-    GameObject primerTocado;
+    public GameObject primerTocado;
     public GameObject medioTocado;
-    GameObject ultimoTocado;
+    public GameObject ultimoTocado;
 
     public int contObjeto;
 
@@ -74,7 +77,7 @@ public class Reco1 : MonoBehaviour
             {
                 //Dibujar linea
                 Vector3 dondeGenerar = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -1);
-                GameObject lineaActual = Instantiate(lineaGenerar, dondeGenerar, transform.rotation);
+                lineaActual = Instantiate(lineaGenerar, dondeGenerar, transform.rotation);
                 linea = lineaActual.GetComponent<Linea>();
             }
             
@@ -82,16 +85,38 @@ public class Reco1 : MonoBehaviour
 
         if(Input.touchCount>0 && Input.touches[0].phase == TouchPhase.Stationary)
         {
-            medioTocado=raycastToObject();
-            if ((medioTocado.name != objNumeros[contObjeto+1].name + "(Clone)")&& medioTocado.name != objNumeros[contObjeto].name + "(Clone)")
+            try
             {
-                linea = null;
+                medioTocado =raycastToObject();
+                if ( medioTocado.name!= objNumeros[contObjeto].name + "(Clone)")
+                {
+               
+                        ultimoTocado = raycastToObject();
+                        Debug.Log("ultimo Tocado" + ultimoTocado);
+                    
+                    
+                    Debug.Log("contObjeto " + contObjeto);
+
+                    linea = null;
+                }
+            }
+            catch (Exception e)
+            {
+                print(e);
             }
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            ultimoTocado=raycastToObject();
+            if ((primerTocado.name == objNumeros[contObjeto].name + "(Clone)") &&(ultimoTocado.name == objNumeros[contObjeto+1].name + "(Clone)"))
+            {
+                contObjeto++;
+            }
+            else if(ultimoTocado.name != objNumeros[contObjeto + 1].name + "(Clone)")
+            {
+                Destroy(lineaActual);
+            }
+ 
             linea = null;
         }
 

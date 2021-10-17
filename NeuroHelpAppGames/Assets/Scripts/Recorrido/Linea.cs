@@ -15,16 +15,7 @@ public class Linea : MonoBehaviour
         linea = GetComponent<LineRenderer>();
     }
 
-    private void Update()
-    {
-        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Stationary)
-        {
-            Reco1.GetInstance().medioTocado = Reco1.GetInstance().raycastToObject();
-           
-            Debug.Log("Medio tocado transmitido por linea  " + Reco1.GetInstance().medioTocado.name);
-
-        }
-    }
+    
     public void DibujarLinea(Vector2 ratonPos)
     {
         if(puntos == null)
