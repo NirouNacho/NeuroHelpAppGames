@@ -38,10 +38,7 @@ public class GameManagerRecorrido : MonoBehaviour
         N3erJuego.enabled = false;
         N4toJuego.enabled = false;
         Final.enabled = false;
-        //Scripts
-        this.GetComponent<Rep1>().enabled = false;
-        this.GetComponent<Rep2>().enabled = false;
-        this.GetComponent<Rep3>().enabled = false;
+     
     }
 
     // Update is called once per frame

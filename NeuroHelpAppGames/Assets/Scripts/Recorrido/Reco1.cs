@@ -99,7 +99,7 @@ public class Reco1 : MonoBehaviour
         Debug.Log("StartReco1Game");
 
 
-        //GameManagerRecorrido.GetInstance().StartReco1Game();
+        GameManagerRecorrido.GetInstance().StartReco1Game();
     }
 
     public void StartReco2Game()
@@ -111,6 +111,8 @@ public class Reco1 : MonoBehaviour
 
         ImprimirNumeros(objNumeros, 5, Recorrido2Positions);// 6 numeros
         Debug.Log("StartReco2Game");
+
+        GameManagerRecorrido.GetInstance().StartReco2Game();
     }
 
     public void StartReco3Game()
@@ -122,6 +124,7 @@ public class Reco1 : MonoBehaviour
 
         ImprimirNumeros(objNumeros, 6, Recorrido3Positions);// 7 numeros
         Debug.Log("StartReco3Game");
+        GameManagerRecorrido.GetInstance().StartReco3Game();
     }
     public void StartReco4Game()
     {
@@ -132,6 +135,7 @@ public class Reco1 : MonoBehaviour
 
         ImprimirNumeros(objNumeros, 7, Recorrido4Positions);// 8 numeros
         Debug.Log("StartReco4Game");
+        GameManagerRecorrido.GetInstance().StartReco4Game();
     }
 
     // Start is called before the first frame update
@@ -209,9 +213,33 @@ public class Reco1 : MonoBehaviour
             SearchObjPhrase.gameObject.SetActive(false);
             Camera.main.backgroundColor = colorGreen;
             
+            switch (maxObjetos)
+            {
+                case 4:
+                    StartCoroutine(GameManagerRecorrido.GetInstance().FelicidadesWait(GameStateReco.InicioReco2));
+                    maxObjetos = 0;
+                    break;
+
+                case 5:
+                    StartCoroutine(GameManagerRecorrido.GetInstance().FelicidadesWait(GameStateReco.InicioReco3));
+                    maxObjetos = 0;
+                    break;
+                case 6:
+                    StartCoroutine(GameManagerRecorrido.GetInstance().FelicidadesWait(GameStateReco.InicioReco4));
+                    maxObjetos = 0;
+                    break;
+
+                case 7:
+                    StartCoroutine(GameManagerRecorrido.GetInstance().FelicidadesWait(GameStateReco.FinalReco));
+                    maxObjetos = 0;
+                    break;
+                default:
+                    
+                    break;
+
+            }
             
-            StartCoroutine(GameManagerRecorrido.GetInstance().FelicidadesWait(GameStateReco.InicioReco2));
-            GameManagerRecorrido.GetInstance().GetComponent<Rep1>().enabled = false;
+            
         }
 
     }
