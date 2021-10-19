@@ -187,8 +187,6 @@ public class RecoVisual1 : MonoBehaviour
             GameObject.Destroy(target);
         }
 
-
-
     }
 
   

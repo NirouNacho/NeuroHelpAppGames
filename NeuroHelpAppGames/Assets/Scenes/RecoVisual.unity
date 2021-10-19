@@ -661,6 +661,12 @@ MonoBehaviour:
   nombrePara2L: {fileID: 308733855}
   nombrePara2R: {fileID: 1676770204}
   SearchObjPhraseTxt: {fileID: 4255427374608898313}
+  tarjetaRndm1: {fileID: 0}
+  tarjetaRndm2L: {fileID: 0}
+  tarjetaRndm2R: {fileID: 0}
+  colorWhite: {r: 1, g: 1, b: 1, a: 1}
+  colorGreen: {r: 51, g: 176, b: 44, a: 1}
+  colorCeleste: {r: 32, g: 208, b: 231, a: 1}
 --- !u!114 &1234929544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,7 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameState: 0
-  felicitacionesImage: {fileID: 0}
+  felicitacionesImage: {fileID: 5342819115609548838}
   I1erJuego: {fileID: 0}
   V2doJuego: {fileID: 0}
   N3erJuego: {fileID: 0}
@@ -1549,7 +1555,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6c510db388223ba4aba5347b3c4f6999, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b06fafcbd2f79804ba55d2640a34fbdf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

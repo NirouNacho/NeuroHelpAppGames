@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameStateRV
 {
@@ -83,34 +84,34 @@ public class GameManagerRecoVisual : MonoBehaviour
                 break;
             case GameStateRV.RV2:
                 Rep2.GetInstance().SearchObjPhrase.SetActive(true);
-                I1erJuego.enabled = false;
-                V2doJuego.enabled = false;
-                N3erJuego.enabled = false;
-                Final.enabled = false;
+                //I1erJuego.enabled = false;
+                //V2doJuego.enabled = false;
+                //N3erJuego.enabled = false;
+                //Final.enabled = false;
                 Debug.Log(currentGameState);
                 break;
 
             case GameStateRV.InicioRV3:
-                I1erJuego.enabled = false;
-                V2doJuego.enabled = false;
-                N3erJuego.enabled = true;
-                Final.enabled = false;
+                //I1erJuego.enabled = false;
+                //V2doJuego.enabled = false;
+                //N3erJuego.enabled = true;
+                //Final.enabled = false;
                 Debug.Log(currentGameState);
                 break;
             case GameStateRV.RV3:
                 Rep3.GetInstance().SearchObjPhrase.SetActive(true);
-                I1erJuego.enabled = false;
-                V2doJuego.enabled = false;
-                N3erJuego.enabled = false;
-                Final.enabled = false;
+                //I1erJuego.enabled = false;
+                //V2doJuego.enabled = false;
+                //N3erJuego.enabled = false;
+                //Final.enabled = false;
                 Debug.Log(currentGameState);
                 break;
 
             case GameStateRV.FinalRV:
-                I1erJuego.enabled = false;
-                V2doJuego.enabled = false;
-                N3erJuego.enabled = false;
-                Final.enabled = true;
+                //I1erJuego.enabled = false;
+                //V2doJuego.enabled = false;
+                //N3erJuego.enabled = false;
+                //Final.enabled = true;
                 Debug.Log(currentGameState);
                 break;
             default:
@@ -126,8 +127,7 @@ public class GameManagerRecoVisual : MonoBehaviour
 
     public IEnumerator FelicidadesWait(GameStateRV state)
     {
-        felicitacionesImage.SetActive(true);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3);  
         Debug.Log("salida de felicidades");
         felicitacionesImage.SetActive(false);
         ChangeGameState(state);

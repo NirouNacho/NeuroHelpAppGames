@@ -51,10 +51,12 @@ public class ObjectTriggertRvisual : MonoBehaviour
                         visto.SetActive(true);
                         if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.Idle1)
                         {
-                            StartCoroutine(GameManagerRecoVisual.GetInstance().FelicidadesWait(GameStateRV.InicioRV2));
-                            RecoVisual1.GetInstance().tarjetaRndm1.SetActive(true);
-                            RecoVisual1.GetInstance().DestroyObjects("primerafila");
+                            StartCoroutine(DestroyWait());
+                            
+
                             RecoVisual1.GetInstance().SearchObjPhrase.SetActive(false);
+                            StartCoroutine(GameManagerRecoVisual.GetInstance().FelicidadesWait(GameStateRV.InicioRV2));
+
                         }
 
                     }
@@ -67,5 +69,22 @@ public class ObjectTriggertRvisual : MonoBehaviour
         }
     }
 
+
+    IEnumerator DestroyWait()
+    {
+        GameManagerRecoVisual.GetInstance().felicitacionesImage.SetActive(true);
+
+        yield return new WaitForSeconds(3);
+        RecoVisual1.GetInstance().tarjetaRndm1.SetActive(true);
+        Debug.Log("Destroy started : " + Time.time);
+        RecoVisual1.GetInstance().DestroyObjects("primerafila");
+        
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Destroy Coroutine at timestamp : " + Time.time);
+        
+    }
 
 }
