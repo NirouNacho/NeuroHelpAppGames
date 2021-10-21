@@ -51,11 +51,17 @@ public class ObjectTriggertRvisual : MonoBehaviour
                         visto.SetActive(true);
                         if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.Idle1)
                         {
-                            StartCoroutine(DestroyWait());
-                            
-
+                            StartCoroutine(DestroyWait(GameStateRV.InicioRV2));
                             RecoVisual1.GetInstance().SearchObjPhrase.SetActive(false);
-                            StartCoroutine(GameManagerRecoVisual.GetInstance().FelicidadesWait(GameStateRV.InicioRV2));
+                            StartCoroutine(GameManagerRecoVisual.GetInstance().FelicidadesWait(GameStateRV.Idle1));
+
+                        }
+
+                        if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.Idle2)
+                        {
+                            StartCoroutine(DestroyWait(GameStateRV.InicioRV3));
+                            RecoVisual1.GetInstance().SearchObjPhrase.SetActive(false);
+                            StartCoroutine(GameManagerRecoVisual.GetInstance().FelicidadesWait(GameStateRV.Idle2));
 
                         }
 
@@ -70,18 +76,16 @@ public class ObjectTriggertRvisual : MonoBehaviour
     }
 
 
-    IEnumerator DestroyWait()
+    IEnumerator DestroyWait(GameStateRV newState)
     {
-        GameManagerRecoVisual.GetInstance().felicitacionesImage.SetActive(true);
 
         yield return new WaitForSeconds(3);
+        GameManagerRecoVisual.GetInstance().felicitacionesImage.SetActive(true);
         RecoVisual1.GetInstance().tarjetaRndm1.SetActive(true);
         Debug.Log("Destroy started : " + Time.time);
         RecoVisual1.GetInstance().DestroyObjects("primerafila");
-        
+        GameManagerRecoVisual.GetInstance().currentGameState = newState;
         //yield on a new YieldInstruction that waits for 5 seconds.
-        
-
         //After we have waited 5 seconds print the time again.
         Debug.Log("Destroy Coroutine at timestamp : " + Time.time);
         

@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public enum GameStateRV
 {
-    InicioRV1, RV1, InicioRV2, RV2, InicioRV3, RV3, FinalRV,Idle1//, FinalScore
+    InicioRV1, RV1, InicioRV2, RV2, InicioRV3, RV3, FinalRV,
+    Idle1, Idle2,Idle3
+    //, FinalScore
 }
 
 
@@ -42,7 +44,7 @@ public class GameManagerRecoVisual : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      
     }
 
     public void StartinicioRv1Game()
@@ -54,6 +56,12 @@ public class GameManagerRecoVisual : MonoBehaviour
     {
         ChangeGameState(GameStateRV.RV1);
         
+    }
+
+    public void StartRv2Game()
+    {
+        ChangeGameState(GameStateRV.RV2);
+
     }
     private void ChangeGameState(GameStateRV newGameState)
     {
@@ -83,7 +91,7 @@ public class GameManagerRecoVisual : MonoBehaviour
                 Debug.Log(currentGameState);
                 break;
             case GameStateRV.RV2:
-                Rep2.GetInstance().SearchObjPhrase.SetActive(true);
+                //Rep2.GetInstance().SearchObjPhrase.SetActive(true);
                 //I1erJuego.enabled = false;
                 //V2doJuego.enabled = false;
                 //N3erJuego.enabled = false;
@@ -127,10 +135,10 @@ public class GameManagerRecoVisual : MonoBehaviour
 
     public IEnumerator FelicidadesWait(GameStateRV state)
     {
-        yield return new WaitForSeconds(3);  
+        ChangeGameState(state);
+        yield return new WaitForSeconds(5);  
         Debug.Log("salida de felicidades");
         felicitacionesImage.SetActive(false);
-        ChangeGameState(state);
         Debug.Log("Este es el estado " + state);
     }
 
