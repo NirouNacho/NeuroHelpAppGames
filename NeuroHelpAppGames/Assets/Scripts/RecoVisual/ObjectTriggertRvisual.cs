@@ -16,6 +16,7 @@ public class ObjectTriggertRvisual : MonoBehaviour
     private void Awake()
     {
         visto = gameObject.transform.Find("visto").gameObject;
+        collider = gameObject.GetComponent<Collider2D>();
     }
 
     // Start is called before the first frame update
@@ -51,7 +52,7 @@ public class ObjectTriggertRvisual : MonoBehaviour
                         visto.SetActive(true);
                         if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.Idle1)
                         {
-                            StartCoroutine(DestroyWait(GameStateRV.InicioRV2));
+                            StartCoroutine(DestroyWaitFor2(GameStateRV.InicioRV2));
                             RecoVisual1.GetInstance().SearchObjPhrase.SetActive(false);
                             StartCoroutine(GameManagerRecoVisual.GetInstance().FelicidadesWait(GameStateRV.Idle1));
 
@@ -59,7 +60,7 @@ public class ObjectTriggertRvisual : MonoBehaviour
 
                         if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.Idle2)
                         {
-                            StartCoroutine(DestroyWait(GameStateRV.InicioRV3));
+                            StartCoroutine(DestroyWaitFor2(GameStateRV.InicioRV3));
                             RecoVisual1.GetInstance().SearchObjPhrase.SetActive(false);
                             StartCoroutine(GameManagerRecoVisual.GetInstance().FelicidadesWait(GameStateRV.Idle2));
 
@@ -67,8 +68,45 @@ public class ObjectTriggertRvisual : MonoBehaviour
 
                     }
                     
-                    Debug.Log("haz tocado la pantalla en el obj: " + objName);
-                  
+
+                    
+                    if(GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.Idle3)
+                    {
+                        if ((objName == RecoVisual1.GetInstance().tarjetaRndm2L.name) || (objName == RecoVisual1.GetInstance().tarjetaRndm2R.name))
+                        {
+                            visto.SetActive(true);
+                            collider.enabled = false;
+                            RecoVisual1.GetInstance().isFounded++;
+                            Debug.Log("haz tocado la pantalla en el obj: " + objName);
+                            if (RecoVisual1.GetInstance().isFounded == 2)
+                            {
+                                StartCoroutine(DestroyWaitFor4(GameStateRV.InicioRV4));
+                                RecoVisual1.GetInstance().SearchObjPhrase.SetActive(false);
+                                StartCoroutine(GameManagerRecoVisual.GetInstance().FelicidadesWait(GameStateRV.Idle3));
+                            }
+                        }
+                    }
+
+                    if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.Idle4)
+                    {
+                        if ((objName == RecoVisual1.GetInstance().tarjetaRndm2L.name) || (objName == RecoVisual1.GetInstance().tarjetaRndm2R.name))
+                        {
+                            visto.SetActive(true);
+                            collider.enabled = false;
+                            RecoVisual1.GetInstance().isFounded++;
+                            Debug.Log("haz tocado la pantalla en el obj: " + objName);
+                            if (RecoVisual1.GetInstance().isFounded == 2)
+                            {
+                                StartCoroutine(DestroyWaitFor4(GameStateRV.FinalRV));
+                                RecoVisual1.GetInstance().SearchObjPhrase.SetActive(false);
+                                StartCoroutine(GameManagerRecoVisual.GetInstance().FelicidadesWait(GameStateRV.Idle4));
+                                
+
+                            }
+                        }
+                    }
+
+
 
                 }
             }
@@ -76,7 +114,7 @@ public class ObjectTriggertRvisual : MonoBehaviour
     }
 
 
-    IEnumerator DestroyWait(GameStateRV newState)
+    IEnumerator DestroyWaitFor2(GameStateRV newState)
     {
 
         yield return new WaitForSeconds(3);
@@ -89,6 +127,23 @@ public class ObjectTriggertRvisual : MonoBehaviour
         //After we have waited 5 seconds print the time again.
         Debug.Log("Destroy Coroutine at timestamp : " + Time.time);
         
+    }
+
+    IEnumerator DestroyWaitFor4(GameStateRV newState)
+    {
+
+        yield return new WaitForSeconds(3);
+        GameManagerRecoVisual.GetInstance().felicitacionesImage.SetActive(true);
+        if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.Idle4)
+        {
+            GameManagerRecoVisual.GetInstance().buttonsFinals.SetActive(true);
+        }
+        RecoVisual1.GetInstance().tarjetaRndm2L.SetActive(true);
+        RecoVisual1.GetInstance().tarjetaRndm2R.SetActive(true);
+        RecoVisual1.GetInstance().DestroyObjects("primerafila");
+        GameManagerRecoVisual.GetInstance().currentGameState = newState;
+       
+
     }
 
 }

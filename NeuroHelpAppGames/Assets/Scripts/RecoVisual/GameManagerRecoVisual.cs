@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public enum GameStateRV
 {
-    InicioRV1, RV1, InicioRV2, RV2, InicioRV3, RV3, FinalRV,
-    Idle1, Idle2,Idle3
+    InicioRV1, RV1, InicioRV2, RV2, InicioRV3, RV3, InicioRV4, RV4, FinalRV,
+    Idle1, Idle2,Idle3, Idle4
     //, FinalScore
 }
 
@@ -17,6 +17,7 @@ public class GameManagerRecoVisual : MonoBehaviour
     public GameStateRV currentGameState;
     private static GameManagerRecoVisual sharedInstance;
     public GameObject felicitacionesImage;
+    public GameObject buttonsFinals;
     public Canvas I1erJuego;
     public Canvas V2doJuego;
     public Canvas N3erJuego;
@@ -63,31 +64,34 @@ public class GameManagerRecoVisual : MonoBehaviour
         ChangeGameState(GameStateRV.RV2);
 
     }
+
+    public void StartRv3Game()
+    {
+        ChangeGameState(GameStateRV.RV3);
+
+    }
+
+    public void StartRv4Game()
+    {
+        ChangeGameState(GameStateRV.RV4);
+
+    }
     private void ChangeGameState(GameStateRV newGameState)
     {
 
         switch (newGameState)
         {
             case GameStateRV.InicioRV1:
-               // I1erJuego.enabled = false;
-               // V2doJuego.enabled = false;
-               // N3erJuego.enabled = false;
-               // Final.enabled = false;
+                buttonsFinals.SetActive(false);
+               
                 Debug.Log(currentGameState);
                 break;
             case GameStateRV.RV1:
-                //Rep1.GetInstance().SearchObjPhrase.SetActive(true);
-               // I1erJuego.enabled = true;
-              //  V2doJuego.enabled = false;
-               // N3erJuego.enabled = false;
-              //  Final.enabled = false;
+                buttonsFinals.SetActive(false);
                 Debug.Log(currentGameState);
                 break;
             case GameStateRV.InicioRV2:
-               // I1erJuego.enabled = false;
-               // V2doJuego.enabled = true;
-               // N3erJuego.enabled = false;
-               // Final.enabled = false;
+                buttonsFinals.SetActive(false);
                 Debug.Log(currentGameState);
                 break;
             case GameStateRV.RV2:
@@ -107,7 +111,16 @@ public class GameManagerRecoVisual : MonoBehaviour
                 Debug.Log(currentGameState);
                 break;
             case GameStateRV.RV3:
-                Rep3.GetInstance().SearchObjPhrase.SetActive(true);
+                //Rep3.GetInstance().SearchObjPhrase.SetActive(true);
+                //I1erJuego.enabled = false;
+                //V2doJuego.enabled = false;
+                //N3erJuego.enabled = false;
+                //Final.enabled = false;
+                Debug.Log(currentGameState);
+                break;
+
+            case GameStateRV.RV4:
+                //Rep3.GetInstance().SearchObjPhrase.SetActive(true);
                 //I1erJuego.enabled = false;
                 //V2doJuego.enabled = false;
                 //N3erJuego.enabled = false;
@@ -116,10 +129,12 @@ public class GameManagerRecoVisual : MonoBehaviour
                 break;
 
             case GameStateRV.FinalRV:
-                //I1erJuego.enabled = false;
+                I1erJuego.enabled = false;
                 //V2doJuego.enabled = false;
                 //N3erJuego.enabled = false;
                 //Final.enabled = true;
+                buttonsFinals.SetActive(true);
+
                 Debug.Log(currentGameState);
                 break;
             default:

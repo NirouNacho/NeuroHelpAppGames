@@ -47,12 +47,14 @@ public class RecoVisual1 : MonoBehaviour
     public Color colorGreen = new Color(51f, 176f, 44f, 1f);
     public Color colorCeleste = new Color(32f, 208f, 231f, 1f);
 
+    public int isFounded = 0;
+
 
     private void Awake()
     {
         sharedInstance = this;
         tarjetas = LlenarArrayObj("Prefabs/RecoVisual/Tarjetas");
-        tarjetasMostrar2 = new GameObject[3];
+        tarjetasMostrar2 = new GameObject[4];
 
         ButtonContinuar2.SetActive(false);
     }
@@ -101,7 +103,10 @@ public class RecoVisual1 : MonoBehaviour
     {
         felicitacionesImage.SetActive(false);
         SearchObjPhrase.SetActive(true);
+        TxtSearchObjPhrase.text = "Mira detenidamente a las figuras e intenta memorizarlas";
         TextForTwo.SetActive(true);
+        
+
         if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.InicioRV3)
         {
             ButtonContinuar3.SetActive(true);
@@ -118,11 +123,13 @@ public class RecoVisual1 : MonoBehaviour
         {
             tarjetaRndm2R = GetRandomSelected(tarjetas);
         }
+
+        tarjetaRndm1 = tarjetaRndm2L;//auxiliar para que funcione el update
         tarjetaRndm2L = Instantiate(tarjetaRndm2L);
         tarjetaRndm2R = Instantiate(tarjetaRndm2R);
 
-        tarjetaRndm2L.transform.position = new Vector3(4.15f, 0.4f, 0);
-        tarjetaRndm2R.transform.position = new Vector3(3.9f, 0.4f, 0);
+        tarjetaRndm2R.transform.position = new Vector3(4.15f, 0.4f, 0);
+        tarjetaRndm2L.transform.position = new Vector3(-3.9f, 0.4f, 0);
         auxiliarTextL = tarjetaRndm2L.name;
         auxiliarTextR = tarjetaRndm2R.name;
 
@@ -137,15 +144,27 @@ public class RecoVisual1 : MonoBehaviour
 
     }
 
+    public void StartRV4Game()
+    {
+        StartRV3Game();
+
+    }
+
 
     void Start()
     {
-        StartRV1Game();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.InicioRV1)
+        {
+            StartRV1Game();
+            GameManagerRecoVisual.GetInstance().currentGameState = GameStateRV.Idle1;
+        }
+
         if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.RV1)
         {
             tarjetaRndm1.SetActive(false);
@@ -170,10 +189,13 @@ public class RecoVisual1 : MonoBehaviour
         if(GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.RV2)
         {
             tarjetaRndm1.SetActive(false);
+            
+
+           
             TextForOne.SetActive(false);
             ButtonContinuar2.SetActive(false);
 
-            TxtSearchObjPhrase.text = "¿Qué figura apareció antes?";
+            TxtSearchObjPhrase.text = "¿Qué figura apareciero antes?";
             print("Lleno tarjetas");
             llenarTarjetaMostrar2(tarjetasMostrar2);
             print("Imprimo tarjetas");
@@ -182,6 +204,54 @@ public class RecoVisual1 : MonoBehaviour
             GameManagerRecoVisual.GetInstance().currentGameState = GameStateRV.Idle2;
         }
 
+        if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.InicioRV3)
+        {
+            StartRV3Game();
+            isFounded = 0;
+            GameManagerRecoVisual.GetInstance().currentGameState = GameStateRV.Idle3;
+        }
+
+        if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.RV3)
+        {
+            tarjetaRndm2L.SetActive(false);
+            tarjetaRndm2R.SetActive(false);
+
+            
+            TextForTwo.SetActive(false);
+            ButtonContinuar3.SetActive(false);
+
+            TxtSearchObjPhrase.text = "¿Qué figuras aparecieron antes?";
+            print("Lleno tarjetas");
+            llenarTarjetaMostrar4(tarjetasMostrar2);
+            print("Imprimo tarjetas");
+            imprimirTarjetas4Mostrar(tarjetasMostrar2);
+            print("Estado update1 " + GameManagerRecoVisual.GetInstance().currentGameState);
+            GameManagerRecoVisual.GetInstance().currentGameState = GameStateRV.Idle3;
+        }
+
+        if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.InicioRV4)
+        {
+            StartRV4Game();
+            isFounded = 0;
+            GameManagerRecoVisual.GetInstance().currentGameState = GameStateRV.Idle4;
+        }
+        if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.RV4)
+        {
+            tarjetaRndm2L.SetActive(false);
+            tarjetaRndm2R.SetActive(false);
+
+
+            TextForTwo.SetActive(false);
+            ButtonContinuar4.SetActive(false);
+
+            TxtSearchObjPhrase.text = "¿Qué figuras aparecieron antes?";
+            print("Lleno tarjetas");
+            llenarTarjetaMostrar4(tarjetasMostrar2);
+            print("Imprimo tarjetas");
+            imprimirTarjetas4Mostrar(tarjetasMostrar2);
+            print("Estado update1 " + GameManagerRecoVisual.GetInstance().currentGameState);
+            GameManagerRecoVisual.GetInstance().currentGameState = GameStateRV.Idle4;
+        }
 
     }
 
@@ -255,17 +325,40 @@ public class RecoVisual1 : MonoBehaviour
     public GameObject[] llenarTarjetaMostrar4(GameObject[] aLLenar)
     {
         GameObject auxObj;
-        GameObject tarjetaR1 = tarjetaRndm1;
-        string nameTarjetaRndm1 = tarjetaR1.name;
-        nameTarjetaRndm1 = nameTarjetaRndm1.Replace("(Clone)", "");
-        tarjetaRndm1.name = nameTarjetaRndm1;
+        GameObject tarjetaR1R = tarjetaRndm2R;
+        GameObject tarjetaR1L = tarjetaRndm2L;
 
-        int randoma = UnityEngine.Random.Range(0, 2);
+        string nameTarjetaRndm1R = tarjetaR1R.name;
+        nameTarjetaRndm1R = nameTarjetaRndm1R.Replace("(Clone)", "");
+        tarjetaR1R.name = nameTarjetaRndm1R;
 
-        for (int y = 0; y <= 1; y++)
+        string nameTarjetaRndm1L = tarjetaR1L.name;
+        nameTarjetaRndm1L = nameTarjetaRndm1L.Replace("(Clone)", "");
+        tarjetaR1L.name = nameTarjetaRndm1L;
+
+
+        int randoma = UnityEngine.Random.Range(0, 4);
+        int randomb = UnityEngine.Random.Range(0, 4);
+
+        while (randoma == randomb)
+        {
+            randomb = UnityEngine.Random.Range(0, 4);
+        }
+        aLLenar[randoma] = tarjetaR1R;
+        aLLenar[randomb] = tarjetaR1L;
+
+        Debug.Log("Vector aLLenar[0," + randoma + " ] randoma " + aLLenar[randoma]);
+        Debug.Log("Vector aLLenar[0," + randomb + " ] randomb " + aLLenar[randomb]);
+       
+        Debug.Log("tarjetaR1R.name  " + tarjetaR1R.name);
+        Debug.Log("tarjetaR1L.name  " + tarjetaR1L.name);
+
+
+        for (int y = 0; y <= 3; y++)
         {
             int a = UnityEngine.Random.Range(0, 11);
             auxObj = tarjetas[a];
+            Debug.Log("auxObj.name  " + auxObj.name);
             bool canIn = false;
 
             for (int x = 0; x <= y; x++)
@@ -273,8 +366,11 @@ public class RecoVisual1 : MonoBehaviour
                 if (aLLenar[x] == null)
                 {
                     canIn = true;
-                    if (auxObj.name == nameTarjetaRndm1)
+                    if ((auxObj.name == tarjetaR1R.name)|| (auxObj.name == tarjetaR1L.name))
                     {
+                        Debug.Log("xx tarjetaR1R.name  " + tarjetaR1R.name);
+                        Debug.Log("xx tarjetaR1L.name  " + tarjetaR1L.name);
+                        Debug.Log("xx auxObj.name  " + auxObj.name);
                         canIn = false;
                         y--;
                         break;
@@ -283,6 +379,15 @@ public class RecoVisual1 : MonoBehaviour
                 }
                 else if (aLLenar[x].name == auxObj.name) //auxiliarText
                 {
+                    canIn = false;
+                    y--;
+                    break;
+                }
+                else if ((auxObj.name == tarjetaR1R.name)|| (auxObj.name == tarjetaR1L.name))
+                {
+                    Debug.Log("xx tarjetaR1R.name  " + tarjetaR1R.name);
+                    Debug.Log("xx tarjetaR1L.name  " + tarjetaR1L.name);
+                    Debug.Log("xx auxObj.name  " + auxObj.name);
                     canIn = false;
                     y--;
                     break;
@@ -299,9 +404,10 @@ public class RecoVisual1 : MonoBehaviour
 
         }
 
-        aLLenar[randoma] = tarjetaR1;
-        Debug.Log("tarjetaRndm1.name " + tarjetaRndm1.name);
-        for (int i = 0; i <= 1; i++)
+        
+        Debug.Log("tarjetaRndm2R.name " + tarjetaR1R.name);
+        Debug.Log("tarjetaRndm2L.name " + tarjetaR1L.name);
+        for (int i = 0; i <= 3; i++)
         {
             Debug.Log("Array a llenar:  aLLenar[" + i + "] " + aLLenar[i]);
         }
@@ -322,6 +428,24 @@ public class RecoVisual1 : MonoBehaviour
             g.SetActive(true);
         }
     }
+
+    public void imprimirTarjetas4Mostrar(GameObject[] aImprimir)
+    {
+        GameObject g;
+        Vector3[] posTarjetas4 = new Vector3[4];
+        posTarjetas4[0] = new Vector3(-6, 0, 0);
+        posTarjetas4[1] = new Vector3(-2, 0, 0);
+        posTarjetas4[2] = new Vector3(2, 0, 0);
+        posTarjetas4[3] = new Vector3(6, 0, 0);
+
+        for (int i = 0; i <= 3; i++)
+        {
+            g = Instantiate(aImprimir[i]);
+            g.transform.position = posTarjetas4[i];
+            g.SetActive(true);
+        }
+    }
+
 
     public void DestroyObjects(string tag)
     {
