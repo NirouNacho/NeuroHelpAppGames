@@ -10,6 +10,7 @@ TagManager:
   - tercerafila
   - cuartafila
   - quintafila
+  - DragParent
   layers:
   - Default
   - TransparentFX
