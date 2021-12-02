@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class DropSlot : MonoBehaviour, IDropHandler
 {
     public GameObject item;
-    string parentName;
+    string parentName,panelName;
     int searcheadPos;
 
     public void OnDrop(PointerEventData eventData)//cuando un tiem le caiga encima
@@ -16,7 +16,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
             item = DragHandler.itemDragging;
             item.transform.SetParent(transform);
             item.transform.position = transform.position;
-            
+            panelName = QueyDonde.GetInstance().nombreRndm.name+"(Clone)";
             parentName = transform.parent.name;
             print("parent name " + parentName);
 
@@ -26,32 +26,32 @@ public class DropSlot : MonoBehaviour, IDropHandler
             switch (searcheadPos)
             {
                 case 0:
-                    if(parentName== "TarjetaVacia(Clone)")
+                    if((parentName== "TarjetaVacia(Clone)")&&panelName==item.name)
                     {
-                        StartCoroutine(QueyDonde.GetInstance().CorrectoWait());
+                        correctA();
                     }
                     else
                     {
-                        StartCoroutine(QueyDonde.GetInstance().InCorrectoWait());
+                        inCorrectA();
                     }
                     break;
                 case 1:
-                    if (parentName == "TarjetaVacia(Clone)(Clone)")
+                    if (parentName == "TarjetaVacia(Clone)(Clone)" && panelName == item.name)
                     {
-                        StartCoroutine(QueyDonde.GetInstance().CorrectoWait());
+                        correctA();
                     }
                     else
                     {
-                        StartCoroutine(QueyDonde.GetInstance().InCorrectoWait());
+                        inCorrectA();
                     }
                     break;
                 case 2:
-                    if (parentName == "TarjetaVacia(Clone)(Clone)(Clone)")
+                    if (parentName == "TarjetaVacia(Clone)(Clone)(Clone)" && panelName == item.name)
                     {
-                        StartCoroutine(QueyDonde.GetInstance().CorrectoWait());
+                        correctA();
                     }
                     else {
-                        StartCoroutine(QueyDonde.GetInstance().InCorrectoWait());
+                        inCorrectA();
                     }
                     break;
                 default:
@@ -68,6 +68,27 @@ public class DropSlot : MonoBehaviour, IDropHandler
         }
 
     }
+
+    public void correctA()
+    {
+        QueyDonde.GetInstance().unactivePoolItems();
+        StartCoroutine(QueyDonde.GetInstance().CorrectoWait());
+        item.SetActive(false);
+        
+
+
+    }
+
+    public void inCorrectA()
+    {
+        QueyDonde.GetInstance().unactivePoolItems();
+        StartCoroutine(QueyDonde.GetInstance().InCorrectoWait());
+        
+        
+    }
+
+   
+
     void Update()
     {
         if (item != null && item.transform.parent != transform)

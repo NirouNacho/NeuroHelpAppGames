@@ -28,7 +28,7 @@ public class GameManagerRecoVisual : MonoBehaviour
         sharedInstance = this;
         currentGameState =  new GameStateRV();
         currentGameState = GameStateRV.InicioRV1;
-}
+    }
     public static GameManagerRecoVisual GetInstance()
     {
         return sharedInstance;

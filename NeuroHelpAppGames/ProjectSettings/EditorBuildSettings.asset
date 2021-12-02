@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RecoVisual.unity
     guid: 26a60c34fe69dfa44970b0b6aa49fcf8
+  - enabled: 1
+    path: Assets/Scenes/QueyDondeGame.unity
+    guid: d42f420e431143946be0a8ec344fcc7c
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 3d5c00aa11e283a41816a32e06fa5e5a,
       type: 2}

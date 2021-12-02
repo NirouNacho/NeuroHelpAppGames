@@ -20,6 +20,7 @@ public class QueyDonde : MonoBehaviour
     GameObject[] nombres;
     GameObject[] nombresPool;
     GameObject[] tarjetaVacia;
+    GameObject[] felicitacionesFinal;
 
     public GameObject tarjetaRndm;
     public GameObject nombreRndm;
@@ -30,6 +31,14 @@ public class QueyDonde : MonoBehaviour
     public GameObject pool;
     public GameObject buttonSiguiente;
     public Text topText;
+    public GameObject panel;
+
+    //objetos para boton
+    public GameObject ButtonSiguiente1;
+    public GameObject ButtonSiguiente2;
+    public GameObject ButtonSiguiente3;
+    public GameObject ButtonFinals;
+
     //posiciones de tarjetas
 
     Vector3 pos1 = new Vector3(-584, 190, 0);
@@ -45,6 +54,7 @@ public class QueyDonde : MonoBehaviour
         nombres = new GameObject[4];
         nombresPool = new GameObject[4];
         vacios = new GameObject[4];
+        felicitacionesFinal = new GameObject[4];
 
         correctoImage.SetActive(false);
         incorrectoImage.SetActive(false);
@@ -55,6 +65,7 @@ public class QueyDonde : MonoBehaviour
         tarjetas = LlenarArrayObj("Prefabs/QueyDonde/Tarjetas");
         tarjetaVacia = LlenarArrayObj("Prefabs/QueyDonde/TarjetaVacia");
         nombres = LlenarArrayObj("Prefabs/QueyDonde/Nombres");
+        felicitacionesFinal = LlenarArrayObj("Prefabs/QueyDonde/Buttons");
         for (int i = 0; i <= 2; i++)
         {
             vacios[i] = tarjetaVacia[0];
@@ -68,11 +79,14 @@ public class QueyDonde : MonoBehaviour
         return sharedInstance;
     }
 
-
+  
     public void StartQueyDonde()
     {
+        buttonSiguiente.SetActive(true);
+        ButtonFinals.SetActive(false);
         topText.text = "Fijate qué objetos hay y en que lugar se encuentran, luego tendrás que recordarlos.";
         tarjetaRndm = GetRandomSelected(tarjetas);
+
         imprimir1parte();
         llenarPool();
 
@@ -83,6 +97,8 @@ public class QueyDonde : MonoBehaviour
 
     }
 
+
+
     public void StartQueyDondeDrag()
     {
         tarjetaRndm.SetActive(false);
@@ -91,17 +107,61 @@ public class QueyDonde : MonoBehaviour
         topText.text = "Arrastra la palabra en el lugar que se encontraba su respectiva imagen.";
     }
 
+    public void StartQueyDonde2()
+    {
+        StartQueyDonde();
+    }
+
+    public void StartQueyDonde3()
+    {
+        StartQueyDonde();
+    }
+
+    public void ReStartQueyDonde()
+    {
+        StartQueyDonde();
+        GameManagerQue.GetInstance().currentGameState = GameStateQyD.InicioQyD1;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        StartQueyDonde();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(GameManagerQue.GetInstance().currentGameState == GameStateQyD.InicioQyD1)
+        {
+            StartQueyDonde();
+            GameManagerQue.GetInstance().currentGameState = GameStateQyD.Idle1;
+        }
+        if(GameManagerQue.GetInstance().currentGameState == GameStateQyD.QyD1)
+        {
+            StartQueyDondeDrag();
+            GameManagerQue.GetInstance().currentGameState = GameStateQyD.Idle1;
+        }
+        if (GameManagerQue.GetInstance().currentGameState == GameStateQyD.InicioQyD2)
+        {
+            StartQueyDonde2();
+            GameManagerQue.GetInstance().currentGameState = GameStateQyD.Idle2;
+        }
+        if (GameManagerQue.GetInstance().currentGameState == GameStateQyD.QyD2)
+        {
+            StartQueyDondeDrag();
+            GameManagerQue.GetInstance().currentGameState = GameStateQyD.Idle2;
+        }
+        if (GameManagerQue.GetInstance().currentGameState == GameStateQyD.InicioQyD3)
+        {
+            StartQueyDonde3();
+            GameManagerQue.GetInstance().currentGameState = GameStateQyD.Idle3;
+        }
+        if (GameManagerQue.GetInstance().currentGameState == GameStateQyD.QyD3)
+        {
+            StartQueyDondeDrag();
+            GameManagerQue.GetInstance().currentGameState = GameStateQyD.Idle3;
+        }
     }
 
 
@@ -217,21 +277,73 @@ public class QueyDonde : MonoBehaviour
     public IEnumerator CorrectoWait()
     {
         correctoImage.SetActive(true);
+        tarjetaRndm.SetActive(true);
+        nombreRndm.GetComponent<DragHandler>().enabled = false;
         yield return new WaitForSeconds(3);
-        correctoImage.SetActive(false);
-        Debug.Log("salida de felicidades");
-        
-        
+        correctoImage.SetActive(false);      
+        activePoolItems();
+        DestroyObjects("primerafila");
+        changeStatesDS();
     }
 
     public IEnumerator InCorrectoWait()
     {
        
         incorrectoImage.SetActive(true);
+        tarjetaRndm.SetActive(true);
+        nombreRndm.GetComponent<DragHandler>().enabled = false;
         yield return new WaitForSeconds(3);
         incorrectoImage.SetActive(false);
-        Debug.Log("salida de felicidades");
-        
-        
+        activePoolItems();
+        DestroyObjects("primerafila");
+        changeStatesDS();
     }
+
+    public void unactivePoolItems()
+    {
+        for (int i = 0; i <= 2; i++)
+        {
+            nombresPool[i].SetActive(false);
+            //nombresPool[i].GetComponent<DragHandler>().enabled = false;
+        }
+    }
+
+    public void activePoolItems()
+    {
+        for (int i = 0; i <= 2; i++)
+        {
+            nombresPool[i].SetActive(true);
+            //nombresPool[i].GetComponent<DragHandler>().enabled = false;
+        }
+    }
+
+    public void changeStatesDS()
+    {
+        if (GameManagerQue.GetInstance().currentGameState == GameStateQyD.Idle1)
+        {
+            GameManagerQue.GetInstance().StartInicioQyD2Game();
+        }
+        if (GameManagerQue.GetInstance().currentGameState == GameStateQyD.Idle2)
+        {
+            GameManagerQue.GetInstance().StartInicioQyD3Game();
+        }
+        if (GameManagerQue.GetInstance().currentGameState == GameStateQyD.Idle3)
+        {
+            ButtonFinals.SetActive(true);
+        }
+    }
+
+    public void DestroyObjects(string tag)
+    {
+
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
+
+
+        foreach (GameObject target in gameObjects)
+        {
+            GameObject.Destroy(target);
+        }
+
+    }
+
 }
