@@ -83,8 +83,6 @@ public class DropSlot : MonoBehaviour, IDropHandler
     {
         QueyDonde.GetInstance().unactivePoolItems();
         StartCoroutine(QueyDonde.GetInstance().InCorrectoWait());
-        
-        
     }
 
    
