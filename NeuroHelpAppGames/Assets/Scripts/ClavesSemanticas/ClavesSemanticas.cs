@@ -9,6 +9,8 @@ public class ClavesSemanticas : MonoBehaviour
 
     int rand1,rand2 , rand3;
     int randa, randb, randc;
+    bool boolContinue=false;
+    public bool isToggle1Correct, isToggle2Correct, isToggle3Correct;
     //Objetos
     public GameObject SearchObjPhrase;
 
@@ -34,10 +36,12 @@ public class ClavesSemanticas : MonoBehaviour
     public Text ToggleText3B;
 
     //Toggle Groups
-    public GameObject ToggleGroup1;
-    public GameObject ToggleGroup2;
-    public GameObject ToggleGroup3;
+    //public GameObject ToggleGroup1;
+    
 
+    public ToggleGroup ToggleGroup1;
+    public ToggleGroup ToggleGroup2;
+    public ToggleGroup ToggleGroup3;
     //Imagenes
 
     public GameObject visto1;
@@ -47,10 +51,14 @@ public class ClavesSemanticas : MonoBehaviour
     public GameObject visto3;
     public GameObject equiz3;
 
+    public GameObject felicitacionesImg;
+    public GameObject ButtonFinals;
+
     //Botones
 
     public Button buttonOK;
     public Button buttonComprobar;
+    
 
     //Grupos de palabras
     //string[][] ArrayGroups;
@@ -100,22 +108,37 @@ public class ClavesSemanticas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartClavesSemanticas();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.InicioCS1)
+        {
+            StartClavesSemanticas();
+            GameManagerCS.GetInstance().currentGameState = GameStateCS.Idle1;
+           
+        }
         
+        if(GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle1)
+        {
+            if (toglesOn()&& boolContinue)
+            {
+                buttonComprobar.gameObject.SetActive(true);
+                boolContinue = false;
+            }
+            
+        }
     }
 
     //funciones
 
     public void SetAcFalseObjects()
     {
-        ToggleGroup1.SetActive(false);
-        ToggleGroup2.SetActive(false);
-        ToggleGroup3.SetActive(false);
+        ToggleGroup1.gameObject.SetActive(false);
+        ToggleGroup2.gameObject.SetActive(false);
+        ToggleGroup3.gameObject.SetActive(false);
         visto1.SetActive(false);
         equiz1.SetActive(false);
         visto2.SetActive(false);
@@ -123,7 +146,12 @@ public class ClavesSemanticas : MonoBehaviour
         visto3.SetActive(false);
         equiz3.SetActive(false);
         buttonComprobar.gameObject.SetActive(false);
-    }
+        isToggle1Correct = false;
+        isToggle2Correct = false;
+        isToggle3Correct = false;
+        felicitacionesImg.SetActive(false);
+        ButtonFinals.SetActive(false);
+}
 
         public void InitialziaTextArrays()
     {
@@ -142,6 +170,7 @@ public class ClavesSemanticas : MonoBehaviour
         //    , Deporte,Fruta,Transporte,Color,Herramienta,Cuerpo};
 
         ArrayGroups.Add(new KeyValuePair<string, string[]>("Bebida", Bebidas));
+        ArrayGroups.Add(new KeyValuePair<string, string[]>("Ropa", Ropa));
         ArrayGroups.Add(new KeyValuePair<string, string[]>("Animal", Animal));
         ArrayGroups.Add(new KeyValuePair<string, string[]>("Mueble", Mueble));
         ArrayGroups.Add(new KeyValuePair<string, string[]>("Comida", Comida));
@@ -158,16 +187,16 @@ public class ClavesSemanticas : MonoBehaviour
     {
         //Select 3 random from array groups
 
-        rand1 = UnityEngine.Random.Range(0, 10);
-        rand2 = UnityEngine.Random.Range(0, 10);
+        rand1 = UnityEngine.Random.Range(0, 11);
+        rand2 = UnityEngine.Random.Range(0, 11);
         while (rand1 == rand2)
         {
-            rand2 = UnityEngine.Random.Range(0, 10);
+            rand2 = UnityEngine.Random.Range(0, 11);
         }
-        rand3 = UnityEngine.Random.Range(0, 10);
+        rand3 = UnityEngine.Random.Range(0, 11);
         while (rand1 == rand3 || rand2 == rand3)
         {
-            rand3 = UnityEngine.Random.Range(0, 10);
+            rand3 = UnityEngine.Random.Range(0, 11);
         }
 
 
@@ -207,9 +236,9 @@ public class ClavesSemanticas : MonoBehaviour
         object2.gameObject.SetActive(false); 
         object3.gameObject.SetActive(false);
 
-        ToggleGroup1.SetActive(true);
-        ToggleGroup2.SetActive(true);
-        ToggleGroup3.SetActive(true);
+        ToggleGroup1.gameObject.SetActive(true);
+        ToggleGroup2.gameObject.SetActive(true);
+        ToggleGroup3.gameObject.SetActive(true);
         
     }
 
@@ -253,8 +282,8 @@ public class ClavesSemanticas : MonoBehaviour
 
         if (posRand == 0)
         {
-            ToggleText2A.text = ArrayGroups[rand2].Value[randa];
-            while (randa == positionDos)
+            ToggleText2A.text = ArrayGroups[rand2].Value[randb];
+            while (randb == positionDos)
             {
                 positionDos = UnityEngine.Random.Range(0, 3);
             }
@@ -262,8 +291,8 @@ public class ClavesSemanticas : MonoBehaviour
         }
         if (posRand == 1)
         {
-            ToggleText2B.text = ArrayGroups[rand2].Value[randa];
-            while (randa == positionDos)
+            ToggleText2B.text = ArrayGroups[rand2].Value[randb];
+            while (randb == positionDos)
             {
                 positionDos = UnityEngine.Random.Range(0, 3);
             }
@@ -276,8 +305,8 @@ public class ClavesSemanticas : MonoBehaviour
 
         if (posRand == 0)
         {
-            ToggleText3A.text = ArrayGroups[rand3].Value[randa];
-            while (randa == positionDos)
+            ToggleText3A.text = ArrayGroups[rand3].Value[randc];
+            while (randc == positionDos)
             {
                 positionDos = UnityEngine.Random.Range(0, 3);
             }
@@ -285,8 +314,8 @@ public class ClavesSemanticas : MonoBehaviour
         }
         if (posRand == 1)
         {
-            ToggleText3B.text = ArrayGroups[rand3].Value[randa];
-            while (randa == positionDos)
+            ToggleText3B.text = ArrayGroups[rand3].Value[randc];
+            while (randc == positionDos)
             {
                 positionDos = UnityEngine.Random.Range(0, 3);
             }
@@ -294,8 +323,70 @@ public class ClavesSemanticas : MonoBehaviour
         }
 
         buttonOK.gameObject.SetActive(false);
-        buttonComprobar.gameObject.SetActive(true);
+        //buttonComprobar.gameObject.SetActive(true);
     }
+
+    private bool toglesOn()
+    {
+        if (ToggleGroup1.AnyTogglesOn()&& ToggleGroup2.AnyTogglesOn()&&ToggleGroup3.AnyTogglesOn())
+        {
+            boolContinue = true;
+            return true;
+        }
+        return false;
+    }
+
+    public void Comprobar()
+    {
+        if (isToggle1Correct && isToggle2Correct && isToggle3Correct)
+        {
+            StartCoroutine(CorrectoWait());
+            
+        }
+    }
+
+
+    public IEnumerator CorrectoWait()
+    {
+        felicitacionesImg.SetActive(true);
+        yield return new WaitForSeconds(4);
+        print("felicitaciones despues de 4 seg");
+    }
+
+    public IEnumerator InCorrectoWait()
+    {
+        yield return new WaitForSeconds(4);
+    }
+
+
+    public void prenderVisto1()
+    {
+        visto1.SetActive(true);
+    }
+
+    public void prenderEquiz1()
+    {
+        equiz1.SetActive(true);
+    }
+    public void prenderVisto2()
+    {
+        visto2.SetActive(true);
+    }
+
+    public void prenderEquiz2()
+    {
+        equiz2.SetActive(true);
+    }
+    public void prenderVisto3()
+    {
+        visto3.SetActive(true);
+    }
+
+    public void prenderEquiz3()
+    {
+        equiz3.SetActive(true);
+    }
+
 }
 
 

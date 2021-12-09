@@ -26,7 +26,7 @@ public class GameManagerCS : MonoBehaviour
     {
         sharedInstance = this;
         currentGameState = new GameStateCS();
-        currentGameState = new GameStateCS();
+        currentGameState = GameStateCS.InicioCS1;
     }
     public static GameManagerCS GetInstance()
     {
