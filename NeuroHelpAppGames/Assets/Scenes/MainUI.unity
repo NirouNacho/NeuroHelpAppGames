@@ -815,7 +815,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: RecorridoGame
+          m_StringArgument: ClavesSematicas
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &314643306
@@ -1180,7 +1180,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: RepeteicionGame
+          m_StringArgument: QueyDondeGame
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &672022488

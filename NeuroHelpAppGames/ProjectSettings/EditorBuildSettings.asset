@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QueyDondeGame.unity
     guid: d42f420e431143946be0a8ec344fcc7c
+  - enabled: 1
+    path: Assets/Scenes/ClavesSematicas.unity
+    guid: 275cf3b83025c5449af3823d6a8585eb
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 3d5c00aa11e283a41816a32e06fa5e5a,
       type: 2}

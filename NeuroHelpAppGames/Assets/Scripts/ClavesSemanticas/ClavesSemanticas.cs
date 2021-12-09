@@ -52,6 +52,7 @@ public class ClavesSemanticas : MonoBehaviour
     public GameObject equiz3;
 
     public GameObject felicitacionesImg;
+    public GameObject intentaloImg;
     public GameObject ButtonFinals;
 
     //Botones
@@ -127,8 +128,37 @@ public class ClavesSemanticas : MonoBehaviour
             {
                 buttonComprobar.gameObject.SetActive(true);
                 boolContinue = false;
+            }  
+        }
+
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.InicioCS2)
+        {
+            StartClavesSemanticas();
+            GameManagerCS.GetInstance().currentGameState = GameStateCS.Idle2;
+
+        }
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle2)
+        {
+            if (toglesOn() && boolContinue)
+            {
+                buttonComprobar.gameObject.SetActive(true);
+                boolContinue = false;
             }
-            
+        }
+
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.InicioCS3)
+        {
+            StartClavesSemanticas();
+            GameManagerCS.GetInstance().currentGameState = GameStateCS.Idle3;
+
+        }
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle3)
+        {
+            if (toglesOn() && boolContinue)
+            {
+                buttonComprobar.gameObject.SetActive(true);
+                boolContinue = false;
+            }
         }
     }
 
@@ -136,6 +166,14 @@ public class ClavesSemanticas : MonoBehaviour
 
     public void SetAcFalseObjects()
     {
+        //true para la primera pantalla
+
+        object1.gameObject.SetActive(true);
+        object2.gameObject.SetActive(true);
+        object3.gameObject.SetActive(true);
+        buttonOK.gameObject.SetActive(true);
+
+        //false los primeros
         ToggleGroup1.gameObject.SetActive(false);
         ToggleGroup2.gameObject.SetActive(false);
         ToggleGroup3.gameObject.SetActive(false);
@@ -150,6 +188,7 @@ public class ClavesSemanticas : MonoBehaviour
         isToggle2Correct = false;
         isToggle3Correct = false;
         felicitacionesImg.SetActive(false);
+        intentaloImg.SetActive(false);
         ButtonFinals.SetActive(false);
 }
 
@@ -341,6 +380,12 @@ public class ClavesSemanticas : MonoBehaviour
         if (isToggle1Correct && isToggle2Correct && isToggle3Correct)
         {
             StartCoroutine(CorrectoWait());
+           
+
+        }
+        else
+        {
+            StartCoroutine(InCorrectoWait());
             
         }
     }
@@ -350,14 +395,61 @@ public class ClavesSemanticas : MonoBehaviour
     {
         felicitacionesImg.SetActive(true);
         yield return new WaitForSeconds(4);
+
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle1)
+        {
+            GameManagerCS.GetInstance().currentGameState = GameStateCS.InicioCS2;
+        }
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle2)
+        {
+            GameManagerCS.GetInstance().currentGameState = GameStateCS.InicioCS3;
+        }
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle3)
+        {
+            FelicitacionesFinal();
+        }
+        ApagarToggles();
         print("felicitaciones despues de 4 seg");
     }
 
     public IEnumerator InCorrectoWait()
     {
+        intentaloImg.SetActive(true);
         yield return new WaitForSeconds(4);
+        print("incorrecto despues de 4 seg");
+
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle1)
+        {
+            GameManagerCS.GetInstance().currentGameState = GameStateCS.InicioCS1;
+        }
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle2)
+        {
+            GameManagerCS.GetInstance().currentGameState = GameStateCS.InicioCS2;
+        }
+        if (GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle3)
+        {
+            GameManagerCS.GetInstance().currentGameState = GameStateCS.InicioCS3;
+        }
+        ApagarToggles();
     }
 
+    private void ApagarToggles()
+    {
+        ToggleGroup1.SetAllTogglesOff();
+        ToggleGroup2.SetAllTogglesOff();
+        ToggleGroup3.SetAllTogglesOff();
+    }
+
+
+    public void FelicitacionesFinal()
+    {
+        ButtonFinals.SetActive(true);
+    }
+
+    public void Reiniciar()
+    {
+        GameManagerCS.GetInstance().currentGameState = GameStateCS.InicioCS1;
+    }
 
     public void prenderVisto1()
     {
