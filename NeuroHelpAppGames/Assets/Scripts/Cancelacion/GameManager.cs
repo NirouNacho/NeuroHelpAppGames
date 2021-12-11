@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     public Canvas N3erJuego;
     public Canvas Final;
 
+    //audio
+
+    public AudioSource aplausos;
 
     private void Awake()
     {
@@ -172,8 +175,10 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator FelicidadesWait(GameState state)
     {
+        
         felicitacionesImage.SetActive(true);
-        yield return new WaitForSeconds(3);
+        aplausos.Play();
+        yield return new WaitForSeconds(6);
         Debug.Log("salida de felicidades");
         felicitacionesImage.SetActive(false);
         ChangeGameState(state);

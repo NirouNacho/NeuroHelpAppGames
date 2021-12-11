@@ -23,6 +23,8 @@ public class GameManagerRecoVisual : MonoBehaviour
     public Canvas N3erJuego;
     public Canvas Final;
 
+    public AudioSource aplausos;
+
     private void Awake()
     {
         sharedInstance = this;
@@ -83,7 +85,7 @@ public class GameManagerRecoVisual : MonoBehaviour
         {
             case GameStateRV.InicioRV1:
                 buttonsFinals.SetActive(false);
-               
+                felicitacionesImage.SetActive(false);
                 Debug.Log(currentGameState);
                 break;
             case GameStateRV.RV1:
@@ -133,6 +135,7 @@ public class GameManagerRecoVisual : MonoBehaviour
                 //V2doJuego.enabled = false;
                 //N3erJuego.enabled = false;
                 //Final.enabled = true;
+                felicitacionesImage.SetActive(true);
                 buttonsFinals.SetActive(true);
 
                 Debug.Log(currentGameState);
@@ -150,8 +153,12 @@ public class GameManagerRecoVisual : MonoBehaviour
 
     public IEnumerator FelicidadesWait(GameStateRV state)
     {
+        
         ChangeGameState(state);
-        yield return new WaitForSeconds(5);  
+        felicitacionesImage.SetActive(true);
+        aplausos.Play();
+        yield return new WaitForSeconds(3);
+        Debug.Log("antes de play se repite");
         Debug.Log("salida de felicidades");
         felicitacionesImage.SetActive(false);
         Debug.Log("Este es el estado " + state);

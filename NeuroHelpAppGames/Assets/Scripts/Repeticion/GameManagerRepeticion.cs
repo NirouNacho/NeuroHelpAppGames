@@ -18,6 +18,10 @@ public class GameManagerRepeticion : MonoBehaviour
     public Canvas N3erJuego;
     public Canvas Final;
 
+    public Text topText;
+
+    public AudioSource aplausos;
+
     private void Awake()
     {
         sharedInstance = this;
@@ -117,6 +121,7 @@ public class GameManagerRepeticion : MonoBehaviour
                 V2doJuego.enabled = false;
                 N3erJuego.enabled = false;
                 Final.enabled = false;
+                topText.text = "Toca solo las figuras que se repiten en cada fila";
                 Debug.Log(currentGameState);
                 break;
             case GameStateRep.Rep1:
@@ -132,6 +137,7 @@ public class GameManagerRepeticion : MonoBehaviour
                 V2doJuego.enabled = true;
                 N3erJuego.enabled = false;
                 Final.enabled = false;
+                topText.text = "Toca solo las figuras que se repiten en cada columna";
                 Debug.Log(currentGameState);
                 break;
             case GameStateRep.Rep2:
@@ -148,6 +154,7 @@ public class GameManagerRepeticion : MonoBehaviour
                 V2doJuego.enabled = false;
                 N3erJuego.enabled = true;
                 Final.enabled = false;
+                topText.text = "Toca solo las figuras que se repiten la tabla";
                 Debug.Log(currentGameState);
                 break;
             case GameStateRep.Rep3:
@@ -178,6 +185,7 @@ public class GameManagerRepeticion : MonoBehaviour
     public IEnumerator FelicidadesWait(GameStateRep state)
     {
         felicitacionesImage.SetActive(true);
+        aplausos.Play();
         yield return new WaitForSeconds(3);
         Debug.Log("salida de felicidades");
         felicitacionesImage.SetActive(false);

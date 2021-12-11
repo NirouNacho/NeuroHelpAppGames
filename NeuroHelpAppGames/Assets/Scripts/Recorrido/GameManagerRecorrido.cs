@@ -19,6 +19,8 @@ public class GameManagerRecorrido : MonoBehaviour
     public Canvas N4toJuego;
     public Canvas Final;
 
+    public AudioSource aplausos;
+
     private void Awake()
     {
         sharedInstance = this;
@@ -170,6 +172,7 @@ public class GameManagerRecorrido : MonoBehaviour
     }
     public IEnumerator FelicidadesWait(GameStateReco state)
     {
+        aplausos.Play();
         felicitacionesImage.SetActive(true);
         yield return new WaitForSeconds(3);
         Debug.Log("salida de felicidades");

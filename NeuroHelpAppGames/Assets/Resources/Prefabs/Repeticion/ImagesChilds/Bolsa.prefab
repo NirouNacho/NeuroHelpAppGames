@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 6816507113512118718}
   m_Layer: 0
   m_Name: Bolsa
-  m_TagString: primerafila
+  m_TagString: quintafila
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

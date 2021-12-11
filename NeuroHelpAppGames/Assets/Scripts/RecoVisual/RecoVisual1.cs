@@ -176,22 +176,22 @@ public class RecoVisual1 : MonoBehaviour
             llenarTarjetaMostrar2(tarjetasMostrar2);
             print("Imprimo tarjetas");
             imprimirTarjetas2Mostrar(tarjetasMostrar2);
-            print("Estado update1 "+GameManagerRecoVisual.GetInstance().currentGameState);
+            print("Estado update1 " + GameManagerRecoVisual.GetInstance().currentGameState);
             GameManagerRecoVisual.GetInstance().currentGameState = GameStateRV.Idle1;
         }
 
-        if(GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.InicioRV2)
+        if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.InicioRV2)
         {
             StartRV2Game();
             GameManagerRecoVisual.GetInstance().currentGameState = GameStateRV.Idle2;
         }
 
-        if(GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.RV2)
+        if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.RV2)
         {
             tarjetaRndm1.SetActive(false);
-            
 
-           
+
+
             TextForOne.SetActive(false);
             ButtonContinuar2.SetActive(false);
 
@@ -216,7 +216,7 @@ public class RecoVisual1 : MonoBehaviour
             tarjetaRndm2L.SetActive(false);
             tarjetaRndm2R.SetActive(false);
 
-            
+
             TextForTwo.SetActive(false);
             ButtonContinuar3.SetActive(false);
 
@@ -252,7 +252,11 @@ public class RecoVisual1 : MonoBehaviour
             print("Estado update1 " + GameManagerRecoVisual.GetInstance().currentGameState);
             GameManagerRecoVisual.GetInstance().currentGameState = GameStateRV.Idle4;
         }
-
+        if (GameManagerRecoVisual.GetInstance().currentGameState == GameStateRV.FinalRV)
+        {
+            felicitacionesImage.SetActive(true);
+            
+        }
     }
 
     public GameObject[] LlenarArrayObj(string direccion)

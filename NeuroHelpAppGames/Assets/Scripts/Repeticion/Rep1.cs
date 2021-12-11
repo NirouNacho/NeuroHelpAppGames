@@ -31,6 +31,7 @@ public class Rep1 : MonoBehaviour
 
     public GameObject SearchObjPhrase;
     public GameObject felicitacionesImage;
+
     //singelton
     private void Awake()
     {

@@ -27,6 +27,10 @@ public class QueyDonde : MonoBehaviour
     GameObject[] vacios;
 
 
+    //audio
+
+    public AudioSource aplausos;
+
     public Canvas canvas;
     public GameObject pool;
     public GameObject buttonSiguiente;
@@ -119,7 +123,7 @@ public class QueyDonde : MonoBehaviour
 
     public void ReStartQueyDonde()
     {
-        StartQueyDonde();
+        
         GameManagerQue.GetInstance().currentGameState = GameStateQyD.InicioQyD1;
     }
 
@@ -276,10 +280,11 @@ public class QueyDonde : MonoBehaviour
 
     public IEnumerator CorrectoWait()
     {
+        aplausos.Play();
         correctoImage.SetActive(true);
         tarjetaRndm.SetActive(true);
         nombreRndm.GetComponent<DragHandler>().enabled = false;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         correctoImage.SetActive(false);      
         activePoolItems();
         DestroyObjects("primerafila");

@@ -15,6 +15,10 @@ public class ClavesSemanticas : MonoBehaviour
     public GameObject SearchObjPhrase;
 
 
+    //audios 
+
+    public AudioSource aplausos;
+
 
     //Textos
 
@@ -394,7 +398,8 @@ public class ClavesSemanticas : MonoBehaviour
     public IEnumerator CorrectoWait()
     {
         felicitacionesImg.SetActive(true);
-        yield return new WaitForSeconds(4);
+        aplausos.Play();
+        yield return new WaitForSeconds(5);
 
         if (GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle1)
         {
@@ -409,13 +414,14 @@ public class ClavesSemanticas : MonoBehaviour
             FelicitacionesFinal();
         }
         ApagarToggles();
+        
         print("felicitaciones despues de 4 seg");
     }
 
     public IEnumerator InCorrectoWait()
     {
         intentaloImg.SetActive(true);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(5);
         print("incorrecto despues de 4 seg");
 
         if (GameManagerCS.GetInstance().currentGameState == GameStateCS.Idle1)
