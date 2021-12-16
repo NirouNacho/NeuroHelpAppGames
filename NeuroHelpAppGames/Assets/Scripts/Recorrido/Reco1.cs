@@ -18,7 +18,8 @@ public class Reco1 : MonoBehaviour
     GameObject[] objNumeros;
 
     //objetos tocados
-
+    private GameObject auxiliar;
+  
     GameObject primerTocado;
     GameObject medioTocado;
     GameObject ultimoTocado;
@@ -72,6 +73,8 @@ public class Reco1 : MonoBehaviour
 
         contObjeto = 0;
         maxObjetos = 5;
+
+        auxiliar = new GameObject("auxiliar");
 
         objNumeros = new GameObject[9];
         primerTocado = new GameObject();
@@ -150,17 +153,25 @@ public class Reco1 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //obtener objeto
-            primerTocado=raycastToObject();
+
+           primerTocado = raycastToObject();
+            
+            
             Debug.Log("primerTocado"+primerTocado);
             Debug.Log("objNumeros[contObjeto] mas el clone" + objNumeros[contObjeto].name + "(Clone)");
-            if (primerTocado.name == objNumeros[contObjeto].name+"(Clone)")
-            {
-                //Dibujar linea
-                Vector3 dondeGenerar = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -1);
-                lineaActual = Instantiate(lineaGenerar, dondeGenerar, transform.rotation);
-                linea = lineaActual.GetComponent<Linea>();
+            try { 
+                if (primerTocado.name == objNumeros[contObjeto].name+"(Clone)")
+                    {
+                        //Dibujar linea
+                        Vector3 dondeGenerar = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -1);
+                        lineaActual = Instantiate(lineaGenerar, dondeGenerar, transform.rotation);
+                        linea = lineaActual.GetComponent<Linea>();
+                    }
+            }catch(NullReferenceException e) {
+                Debug.Log("Error message: " + e);
             }
-            
+
+
         }
 
         if(Input.touchCount>0 && Input.touches[0].phase == TouchPhase.Stationary)
@@ -188,16 +199,23 @@ public class Reco1 : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            if ((primerTocado.name == objNumeros[contObjeto].name + "(Clone)") &&(ultimoTocado.name == objNumeros[contObjeto+1].name + "(Clone)"))
+            try
             {
-                contObjeto++;
+                if ((primerTocado.name == objNumeros[contObjeto].name + "(Clone)") && (ultimoTocado.name == objNumeros[contObjeto + 1].name + "(Clone)"))
+                {
+                    contObjeto++;
+                }
+                else if (ultimoTocado.name != objNumeros[contObjeto + 1].name + "(Clone)")
+                {
+                    Destroy(lineaActual);
+                }
+
+                linea = null;
             }
-            else if(ultimoTocado.name != objNumeros[contObjeto + 1].name + "(Clone)")
+            catch (NullReferenceException e)
             {
-                Destroy(lineaActual);
+                Debug.Log("Error message: " + e);
             }
- 
-            linea = null;
         }
 
         if (linea != null)
