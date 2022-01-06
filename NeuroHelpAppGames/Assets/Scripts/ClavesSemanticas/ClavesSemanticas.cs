@@ -205,7 +205,7 @@ public class ClavesSemanticas : MonoBehaviour
         Comida = new string[] { "sopa", "ensalada", "pizza" };
         Deporte = new string[] { "fútbol", "basket", "ciclismo" };
         Fruta = new string[] { "pera", "manzana", "piña" };
-        Transporte = new string[] { "trole", "taxi", "bibicleta" };
+        Transporte = new string[] { "trole", "taxi", "bicicleta" };
         Color = new string[] { "rojo", "azul", "amarillo" };
         Herramienta = new string[] { "martillo", "serrucho", "destornillador" };
         Cuerpo = new string[] { "cabeza", "brazos", "piernas" };

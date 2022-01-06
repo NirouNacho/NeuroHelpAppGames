@@ -9,7 +9,9 @@
 [Bb]uilds/
 [Ll]ogs/
 [Mm]emoryCaptures/
-[Aa]ssets/Firebase/
+[Aa]ssets/Firebase/Plugins/
+[Aa]ssets/Plugin/Android/Firebase/
+
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -60,3 +62,4 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+*.so

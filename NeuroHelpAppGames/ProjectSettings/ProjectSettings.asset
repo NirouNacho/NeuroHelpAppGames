@@ -117,7 +117,7 @@ PlayerSettings:
   stadiaTargetFramerate: 0
   vulkanNumSwapchainBuffers: 3
   vulkanEnableSetSRGBWrite: 0
-  vulkanEnableLateAcquireNextImage: 0
+  vulkanEnableLateAcquireNextImage: 1
   m_SupportedAspectRatios:
     4:3: 1
     5:4: 1

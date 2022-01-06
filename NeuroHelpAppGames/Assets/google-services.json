@@ -1,0 +1,69 @@
+{
+  "project_info": {
+  "firebase_url": "null",
+    "project_number": "967083805590",
+    "project_id": "demounity-d4628",
+    "storage_bucket": "demounity-d4628.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967083805590:android:9194bc9f6600987a64abb7",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.NeuroHelpAppGames"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967083805590-ing6skj0r11qg1u386c21rvl55eu8aan.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUVOORaU_wqU1p1BQFDoJHMz1HcnH_zEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967083805590-ing6skj0r11qg1u386c21rvl55eu8aan.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967083805590:android:9c232183f64a704764abb7",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.firebaseTest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967083805590-ing6skj0r11qg1u386c21rvl55eu8aan.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUVOORaU_wqU1p1BQFDoJHMz1HcnH_zEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967083805590-ing6skj0r11qg1u386c21rvl55eu8aan.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
